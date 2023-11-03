@@ -23,7 +23,7 @@ const getWorkouts = (allWorkouts) => ({
     payload: workoutId,
   });
   const deleteWorkout = (workoutId) => ({
-    type: DELETE_ALBUM,
+    type: DELETE_WORKOUT,
     payload: workoutId,
   });
 
@@ -78,7 +78,7 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
   };
 
   export const editWorkout = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/workoutss/${payload.id}`, {
+    const response = await fetch(`/api/workouts/${payload.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -108,3 +108,43 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
       dispatch(deleteWorkout(workoutId));
     }
   };
+
+// Reducer Function
+
+const initialState = {};
+
+export default function reducer(state = initialState, action) {
+  let newState;
+  switch (action.type) {
+    case GET_WORKOUTS:
+      newState = {};
+      action.payload.forEach((workout) => {
+        newState[workout.id] = workout;
+      });
+      return newState;
+
+    case GET_WORKOUT:
+      newState = { ...state };
+      newState[action.payload.id] = action.payload;
+      return newState;
+
+    case ADD_WORKOUT:
+      newState = { ...state };
+      newState[action.payload.id] = action.payload;
+      return newState;
+
+    case UPDATE_WORKOUT:
+      if (!action.payload.id) return state;
+      newState = { ...state };
+      newState[action.payload.id] = action.payload;
+      return newState;
+
+    case DELETE_WORKOUT:
+      newState = { ...state };
+      delete newState[action.payload];
+      return newState;
+
+    default:
+      return state;
+  }
+}

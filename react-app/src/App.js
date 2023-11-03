@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import WorkoutsPage from "./components/WorkoutsPage"
+import HomeRedirectPage from "./components/HomeRedirectPage";
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
+
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+
+  if (isLoaded) {
+    if (!user) {
+      return <HomeRedirectPage />;
+    }
+  }
+
   return (
     <>
+      {isLoaded && (
       <Navigation isLoaded={isLoaded} />
+      )}
       {isLoaded && (
         <Switch>
           <Route path="/login" >
@@ -23,6 +37,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/workouts">
+            <WorkoutsPage />
           </Route>
         </Switch>
       )}

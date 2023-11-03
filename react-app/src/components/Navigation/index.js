@@ -8,6 +8,7 @@ function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 
 	return (
+		<div>
 		<div className='navigation-container'>
 			<div></div>
 
@@ -20,6 +21,22 @@ function Navigation({ isLoaded }){
 					<ProfileButton user={sessionUser} />
 				</div>
 			)}
+		</div>
+		<div className='nav-menu'>
+			<NavLink to="/workouts">
+				All Workouts
+			</NavLink>
+			<NavLink to="/workouts/liked">
+				Liked Workouts
+			</NavLink>
+			<NavLink to="/my-workouts">
+				My Workouts
+			</NavLink>
+			<NavLink to="/my-exercises">
+				My Exercises
+			</NavLink>
+		</div>
+
 		</div>
 	);
 }

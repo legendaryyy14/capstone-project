@@ -1,1 +1,18 @@
 /* TODO Add site wide styles */
+
+  button {
+    background-color: black;
+    border: 0px;
+    cursor: pointer;
+    color: white;
+  }
+
+  button:hover {
+    color: gray;
+    border: white
+  }
+
+
+  .hidden {
+    display: none;
+  }

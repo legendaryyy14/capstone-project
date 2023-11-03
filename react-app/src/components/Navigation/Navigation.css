@@ -1,11 +1,13 @@
+/* Navigation.css */
 /* Styles for the dropdown menu container */
+
 .profile-dropdown {
   position: absolute;
   top: 40px; /* Adjust the distance from the button */
   right: 20px;
   background-color: black; /* Set your desired background color */
   border: 2px solid #323131; /* Set your desired border style */
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 8px;
   box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6); /* Set your desired box-shadow */
   color: white;
@@ -20,24 +22,7 @@
   color: #f8f4f4; /* Set your desired color */
 }
 
-button {
-  background-color: black;
-  border: 0px;
-  cursor: pointer;
-}
 
-button:hover {
-  color: gray;
-  border: white
-}
-
-
-
-.hidden {
-  display: none;
-}
-
-/* Navigation.css */
 .home-logo {
   width: 370px; /* Adjust the width to your desired size */
   display:flex;
@@ -57,6 +42,33 @@ button:hover {
   padding: 10px 20px; /* Adjust padding as needed */
   background-color: black;
 }
+
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items:flex-start;
+  padding: 10px 20px 10px 10px; /* Adjust padding as needed */
+  background-color: black;
+}
+
+.nav-menu a {
+  right: 20px;
+  background-color: black; /* Set your desired background color */
+  border: 2px solid #323131; /* Set your desired border style */
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6); /* Set your desired box-shadow */
+  color: white;
+  font-size: large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-decoration: none
+
+}
+
+.nav-menu a:hover {
+  color: gray;
+}
+
 
 .profile-button {
   margin-left: auto; /* Push the profile button to the right */
