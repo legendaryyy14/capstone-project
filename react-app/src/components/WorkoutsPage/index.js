@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getAllWorkoutsThunk } from "../../store/workouts";
+import "./WorkoutsPage.css"
 
 function WorkoutsPage() {
     const dispatch = useDispatch();
@@ -11,9 +12,7 @@ function WorkoutsPage() {
     }, [dispatch]);
 
     const workoutObj = useSelector((state) => state.workouts);
-    console.log(workoutObj)
     const workouts = Object.values(workoutObj)
-    console.log(workouts)
 
     return (
         <div className="workouts-page">
@@ -31,7 +30,7 @@ function WorkoutsPage() {
                 alt="workout-cover"
                 title={`${workout.title}`}
               />
-              <a>{`${workout.title}`}</a>
+              <h2>{`${workout.title}`}</h2>
             </NavLink>
           ))}
         </div>

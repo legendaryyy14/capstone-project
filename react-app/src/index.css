@@ -16,3 +16,19 @@
   .hidden {
     display: none;
   }
+
+  a, h1, h2, p {
+    color: white;
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  }
+
+
+  html {
+    background-color: black;
+    padding: 8px;
+    /* color: white; */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  }

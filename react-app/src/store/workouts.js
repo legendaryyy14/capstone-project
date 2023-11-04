@@ -1,5 +1,5 @@
 // Action Types
-const GET_WORKOUTS = "workouts/GET_WORKOUT";
+const GET_WORKOUTS = "workouts/GET_WORKOUTS";
 const GET_WORKOUT = "workouts/GET_WORKOUT";
 const ADD_WORKOUT = "workouts/ADD_WORKOUT";
 const UPDATE_WORKOUT = "workouts/UPDATE_WORKOUT";
@@ -28,8 +28,8 @@ const getWorkouts = (allWorkouts) => ({
   });
 
 
-// Thunk Middleware
 
+// Thunk Middleware
 export const getAllWorkoutsThunk = () => async (dispatch) => {
     const response = await fetch("/api/workouts/");
 
@@ -92,10 +92,6 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
       return error
     }
 
-  //   if (response.ok) {
-  //     const createdAlbum = await response.json();
-  //     dispatch(addAlbum(createdAlbum));
-  //   }
   };
 
   export const editWorkout = (payload) => async (dispatch) => {
@@ -113,11 +109,6 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
       return error
     }
 
-    // if (response.ok) {
-    //   const updatedAlbum = await response.json();
-    //   dispatch(updateAlbum(updatedAlbum));
-    //   return updatedAlbum;
-    // }
   };
 
   export const removeWorkout = (workoutId) => async (dispatch) => {
@@ -130,8 +121,9 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
     }
   };
 
-// Reducer Function
 
+
+// Reducer Function
 const initialState = {};
 
 export default function reducer(state = initialState, action) {

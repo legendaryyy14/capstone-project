@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import WorkoutsPage from "./components/WorkoutsPage"
 import HomeRedirectPage from "./components/HomeRedirectPage";
 import OneWorkoutPage from "./components/OneWorkoutPage";
+import MyExercisesPage from "./components/MyExercisesPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,9 @@ function App() {
           </Route>
           <Route path="/workouts">
             <WorkoutsPage />
+          </Route>
+          <Route path="/my-exercises">
+            <MyExercisesPage />
           </Route>
         </Switch>
       )}

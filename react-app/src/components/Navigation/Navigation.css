@@ -5,12 +5,12 @@
   position: absolute;
   top: 40px; /* Adjust the distance from the button */
   right: 20px;
-  background-color: black; /* Set your desired background color */
+  /* background-color: black; Set your desired background color */
   border: 2px solid #323131; /* Set your desired border style */
   border-radius: 10px;
   padding: 8px;
   box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6); /* Set your desired box-shadow */
-  color: white;
+  /* color: white; */
   font-size: 14px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -47,8 +47,9 @@
   display: flex;
   justify-content: space-between;
   align-items:flex-start;
-  padding: 10px 20px 10px 10px; /* Adjust padding as needed */
-  background-color: black;
+  padding: 40px 20px 40px 10px; /* Adjust padding as needed */
+  /* background-color: black; */
+  border-bottom: 1px solid rgba(147, 145, 138, 0.6);
 }
 
 .nav-menu a {
@@ -57,7 +58,7 @@
   border: 2px solid #323131; /* Set your desired border style */
   border-radius: 10px;
   padding: 8px;
-  box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6); /* Set your desired box-shadow */
+  box-shadow: 2px 4px 8px rgba(163, 162, 158, 0.6); /* Set your desired box-shadow */
   color: white;
   font-size: large;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
