@@ -44,17 +44,38 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
   };
 
   export const getWorkoutByIdThunk = (workoutId) => async (dispatch) => {
-    const response = await fetch(`/api/workouts/${workoutId}`);
+    try {
+      const response = await fetch(`/api/workouts/${workoutId}`);
 
-    if (response.ok) {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
       const workout = await response.json();
       if (workout.errors) {
         return workout.errors;
+      } else {
+        dispatch(getWorkout(workout));
       }
-
-      dispatch(getWorkout(workout));
+    } catch (error) {
+      console.error("Error fetching workout by ID:", error);
+      // Handle the error, e.g., dispatch an action to store the error state
     }
   };
+  // export const getWorkoutByIdThunk = (workoutId) => async (dispatch) => {
+  //   const response = await fetch(`/api/workouts/${workoutId}`);
+
+  //   if (response.ok) {
+  //     const workout = await response.json();
+  //     if (workout.errors) {
+  //       return workout.errors;
+  //     } else {
+
+  //       dispatch(getWorkout(workout));
+  //     }
+
+  //   }
+  // };
 
   export const createWorkout = (payload) => async (dispatch) => {
     const response = await fetch("/api/workouts/create", {

@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import WorkoutsPage from "./components/WorkoutsPage"
 import HomeRedirectPage from "./components/HomeRedirectPage";
+import OneWorkoutPage from "./components/OneWorkoutPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/workouts/:workoutId">
+            <OneWorkoutPage />
           </Route>
           <Route path="/workouts">
             <WorkoutsPage />
