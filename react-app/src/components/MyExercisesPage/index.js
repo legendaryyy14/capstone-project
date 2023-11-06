@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getAllExercisesThunk } from "../../store/exercises";
+import OpenModalButton from "../OpenModalButton";
 import "./MyExercisesPage.css"
 
 function MyExercisesPage() {
@@ -33,7 +34,13 @@ function MyExercisesPage() {
                         alt="exercise-cover"
                         title={`${exercise.title}`}
                      />
+
+                     <div>
                      <h2>{`${exercise.title}`}</h2>
+                     <p>{`${exercise?.description}`}</p>
+                     <p>{`${exercise?.sets}`} sets x {`${exercise?.reps}`} reps</p>
+                     </div>
+
                 </NavLink>
           ))}
         </div>

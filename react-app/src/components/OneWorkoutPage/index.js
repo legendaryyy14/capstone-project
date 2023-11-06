@@ -12,8 +12,9 @@ function OneWorkoutPage() {
     const userId = useSelector((state) => state.session.user.id);
     const workout = useSelector((state) => state.workouts[workoutId])
     const exercises = useSelector((state) => Object.values(state.exercises).filter(exercise => exercise.workout_id === workout.id))
-    const owner = useSelector((state) => state?.users?.users[workout?.user_id - 1])
-console.log(owner)
+    const owner = useSelector((state) => state?.users?.users?.filter(user => user.id === workout.user_id)[0])
+
+
     useEffect(() => {
         dispatch(getWorkoutByIdThunk(workoutId))
         dispatch(getAllExercisesThunk())
@@ -35,10 +36,10 @@ console.log(owner)
 
             <div>
             {exercises?.map((exercise) => (
-                <NavLink
+                <div
                     key={exercise?.id}
                     className="exercise-tile"
-                    to={`/exercises/${exercise?.id}`}
+                    // to={`/exercises/${exercise?.id}`}
                 >
                     <img
                         className="small-exercise-img"
@@ -48,11 +49,16 @@ console.log(owner)
                      />
                      <div>
                      <h2>{`${exercise?.title}`}</h2>
-                     <p>{`${exercise?.description}`}</p>
                      <p>{`${exercise?.sets}`} sets x {`${exercise?.reps}`} reps</p>
-
                      </div>
-                </NavLink>
+
+                     <OpenModalButton
+                className="delete-button"
+                buttonText="Walk-through"
+                modalComponent={<ExerciseDescriptionModal exerciseId={exercise.id}/>}
+            />
+
+                </div>
           ))}
             </div>
         </div>
