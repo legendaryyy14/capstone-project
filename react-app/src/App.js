@@ -10,6 +10,10 @@ import HomeRedirectPage from "./components/HomeRedirectPage";
 import OneWorkoutPage from "./components/OneWorkoutPage";
 import MyExercisesPage from "./components/MyExercisesPage";
 import MyWorkoutsPage from "./components/MyWorkoutsPage";
+import CreateExerciseForm from "./components/CreateExerciseForm";
+import CreateWorkoutForm from "./components/CreateWorkoutForm";
+import UpdateExerciseForm from "./components/UpdateExerciseForm";
+import UpdateWorkoutForm from "./components/UpdateWorkoutForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +45,12 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route path="/workouts/create">
+            <CreateWorkoutForm />
+          </Route>
+          <Route path="/workouts/:workoutId/update">
+            <UpdateWorkoutForm />
+          </Route>
           <Route path="/workouts/:workoutId">
             <OneWorkoutPage />
           </Route>
@@ -49,6 +59,12 @@ function App() {
           </Route>
           <Route path="/my-workouts">
             <MyWorkoutsPage />
+          </Route>
+          <Route path="/exercises/create">
+            <CreateExerciseForm />
+          </Route>
+          <Route path="/exercises/:exerciseId">
+            <UpdateExerciseForm />
           </Route>
           <Route path="/my-exercises">
             <MyExercisesPage />

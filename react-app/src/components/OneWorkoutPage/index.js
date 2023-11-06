@@ -49,14 +49,10 @@ function OneWorkoutPage() {
                      />
                      <div>
                      <h2>{`${exercise?.title}`}</h2>
+                     <p>{`${exercise?.description}`}</p>
                      <p>{`${exercise?.sets}`} sets x {`${exercise?.reps}`} reps</p>
                      </div>
 
-                     <OpenModalButton
-                className="delete-button"
-                buttonText="Walk-through"
-                modalComponent={<ExerciseDescriptionModal exerciseId={exercise.id}/>}
-            />
 
                 </div>
           ))}
