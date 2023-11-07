@@ -34,29 +34,28 @@ function OneWorkoutPage() {
             <p>{`${workout?.description}`}</p>
             </div>
 
-            <div>
-            {exercises?.map((exercise) => (
-                <div
-                    key={exercise?.id}
-                    className="exercise-tile"
-                    // to={`/exercises/${exercise?.id}`}
-                >
-                    <img
-                        className="small-exercise-img"
-                        src={`${exercise?.image_url}`}
-                        alt="exercise-cover"
-                        title={`${exercise?.title}`}
-                     />
-                     <div>
-                     <h2>{`${exercise?.title}`}</h2>
-                     <p>{`${exercise?.description}`}</p>
-                     <p>{`${exercise?.sets}`} sets x {`${exercise?.reps}`} reps</p>
-                     </div>
-
-
-                </div>
-          ))}
+            <h2>Exercises</h2>
+            {exercises.length === 0 ? (
+        <p>No exercises available for this workout.</p>
+      ) : (
+        <div>
+          {exercises.map((exercise) => (
+            <div key={exercise?.id} className="exercise-tile">
+              <h3>{`${exercise?.title}`}</h3>
+              <img
+                className="small-exercise-img"
+                src={`${exercise?.image_url}`}
+                alt="exercise-cover"
+                title={`${exercise?.title}`}
+              />
+              <div>
+                <p>{`${exercise?.sets}`} sets x {`${exercise?.reps}`} reps</p>
+                <p>{`${exercise?.description}`}</p>
+              </div>
             </div>
+          ))}
+        </div>
+      )}
         </div>
     )
 }

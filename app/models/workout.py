@@ -10,7 +10,7 @@ class Workout(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
   title = db.Column(db.String(50), nullable=False)
   description = db.Column(db.String, nullable=False)
-  public = db.Column(db.Boolean, nullable=False)
+  public = db.Column(db.Boolean)
   image_url = db.Column(db.String, nullable=True)
 
   exercises = db.relationship('Exercise', back_populates='workout')

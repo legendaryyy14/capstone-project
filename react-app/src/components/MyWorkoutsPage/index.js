@@ -4,9 +4,11 @@ import { NavLink } from "react-router-dom";
 import { getAllWorkoutsThunk } from "../../store/workouts";
 import OpenModalButton from "../OpenModalButton";
 import DeleteWorkoutModal from "../DeleteWorkoutModal";
+import { useHistory } from "react-router-dom";
 
 function MyWorkoutsPage() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(getAllWorkoutsThunk());
@@ -16,9 +18,23 @@ function MyWorkoutsPage() {
     const workoutObj = useSelector((state) => state.workouts);
     const myWorkouts = Object.values(workoutObj).filter(workout => workout?.user_id === user.id)
 
+    const handleCreateClick = () => {
+      history.push(`/workouts/create`);
+    };
+
+    const handleUpdateClick = (workoutId) => {
+      history.push(`/workouts/${workoutId}/update`);
+    };
+
     return (
         <div className="my-workouts-page">
         <h1>My Workouts</h1>
+        <button
+            className="create-workout-button"
+            onClick={() => handleCreateClick()}
+            >
+                Create a Workout
+            </button>
         <div className="workout-wrapper">
           {myWorkouts.map((workout) => (
             <div>
@@ -36,6 +52,10 @@ function MyWorkoutsPage() {
               <h2>{`${workout.title} by ${user.username}`}</h2>
               <p>{`${workout.description}`}</p>
             </NavLink>
+
+            <button className="update-btn" onClick={() => handleUpdateClick(workout.id)}>
+              Update
+            </button>
 
             <OpenModalButton
                 className="delete-button"

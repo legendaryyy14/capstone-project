@@ -14,7 +14,7 @@ function WorkoutsPage() {
     }, [dispatch]);
 
     const workoutObj = useSelector((state) => state.workouts);
-    const workouts = Object.values(workoutObj)
+    const workouts = Object.values(workoutObj).filter(workout => workout.public === true)
     const users = useSelector((state) => state?.users?.users)
     console.log(users)
 
@@ -28,13 +28,13 @@ function WorkoutsPage() {
               className="workout-tile"
               to={`/workouts/${workout.id}`}
             >
+              <h2>{`${workout.title} by ${users?.filter(user => user?.id === workout?.user_id)[0].username}`}</h2>
               <img
                 className="workout-img"
                 src={`${workout.image_url}`}
                 alt="workout-cover"
                 title={`${workout.title}`}
               />
-              <h2>{`${workout.title} by ${users?.filter(user => user?.id === workout?.user_id)[0].username}`}</h2>
               <p>{`${workout.description}`}</p>
             </NavLink>
           ))}

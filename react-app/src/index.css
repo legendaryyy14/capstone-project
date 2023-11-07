@@ -5,6 +5,10 @@
     border: 0px;
     cursor: pointer;
     color: white;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+
   }
 
   button:hover {
@@ -17,10 +21,11 @@
     display: none;
   }
 
-  a, h1, h2, p {
+  a, h1, h2, p, div {
     color: white;
     text-decoration: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 5px;
 
   }
 

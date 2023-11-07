@@ -1,32 +1,122 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { getAllExercisesThunk } from "../../store/exercises";
-import OpenModalButton from "../OpenModalButton";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { editWorkout } from "../../store/workouts";
 
 function UpdateWorkoutForm() {
     const dispatch = useDispatch();
     const history = useHistory()
-
-    useEffect(() => {
-        dispatch(getAllExercisesThunk());
-    }, [dispatch]);
-
     const userId = useSelector((state) => state.session.user.id);
-    const myExercises = useSelector((state) => Object.values(state.exercises).filter(exercise => exercise.user_id === userId))
-    // const exercises = Object.values(state.exercises)
-    // const myExercises = exercises.filter(exercise => exercise.user_id === userId)
-    const handleCreateClick = (albumId) => {
-        history.push(`/exercises/create`);
-      };
+    const { workoutId } = useParams();
+    const workout = useSelector((state) => state.workouts[workoutId])
+
+    const [title, setTitle] = useState(workout?.title);
+    const [description, setDescription] = useState(workout?.description);
+    const [isPublic, setIsPublic] = useState(workout?.public);
+    const [imageUrl, setImageUrl] = useState(workout?.image_url);
+    const [errors, setErrors] = useState({});
+
+    const updateTitle = (e) => setTitle(e.target.value);
+    const updateDescription = (e) => setDescription(e.target.value);
+    const updateImageUrl = (e) => setImageUrl(e.target.value);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setErrors({});
+        const payload = {
+          id: workout?.id,
+          user_id: userId,
+          title,
+          description,
+          public: isPublic,
+          image_url: imageUrl
+        };
+
+        const res = await dispatch(editWorkout(payload));
+
+        if (res && res?.errors) {
+            setErrors(res?.errors);
+          } else {
+            history.push(`/workouts/${workout?.id}`);
+          };
+
+    };
+    useEffect(() => {
+        console.log("Checkbox state changed:", isPublic);
+        // Perform actions that depend on the updated isPublic state here
+      }, [isPublic]);
+
+    const handleCheckboxChange = () => {
+    console.log(isPublic)
+    setIsPublic(!isPublic);
+    console.log(isPublic)
+     // Toggle the checkbox state when it's clicked
+    }
 
     return (
-        <div className="exercise-page">
-            <h1>Update a Workout</h1>
+<div>
+        <form className="form" onSubmit={handleSubmit}>
+          <h1>Update {`${workout?.title}`}</h1>
 
+          <label>
+            <div className="form-row">
+              Title
+            </div>
+            <input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={updateTitle}
+            />
+              <p className="errors" style={{color:"red", fontSize:11}}>{errors.title}</p>
+          </label>
 
-        </div>
+          <label>
+            <div className="form-row">
+              Description
+            </div>
+            <input
+              type="text"
+              placeholder="Description"
+              value={description}
+              onChange={updateDescription}
+            />
+              <p className="errors" style={{color:"red", fontSize:11}}>{errors.description}</p>
+          </label>
+
+          <label>
+            <div className="form-row">
+              Workout Photo
+            </div>
+            <input
+              type="text"
+              placeholder="Workout Photo URL"
+              value={imageUrl}
+              onChange={updateImageUrl}
+            />
+              <p className="errors" style={{color:"red", fontSize:11}}>{errors.image_url}</p>
+          </label>
+
+          <label>
+            <div className="form-row">
+              Public?
+            </div>
+            <input
+              type="checkbox"
+              placeholder=""
+              checked={isPublic}
+              onChange={handleCheckboxChange}
+            />
+          </label>
+
+          <button
+            type="submit"
+            disabled={ !description || !imageUrl}
+          >
+            Update Workout
+          </button>
+        </form>
+      </div>
     )
 
 }
