@@ -2,10 +2,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
 import workouts from './workouts'
+import exercises from './exercises'
+import users from './users'
 
 const rootReducer = combineReducers({
   session,
-  workouts
+  workouts,
+  exercises,
+  users
 });
 
 

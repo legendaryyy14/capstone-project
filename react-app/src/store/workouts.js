@@ -1,5 +1,5 @@
 // Action Types
-const GET_WORKOUTS = "workouts/GET_WORKOUT";
+const GET_WORKOUTS = "workouts/GET_WORKOUTS";
 const GET_WORKOUT = "workouts/GET_WORKOUT";
 const ADD_WORKOUT = "workouts/ADD_WORKOUT";
 const UPDATE_WORKOUT = "workouts/UPDATE_WORKOUT";
@@ -28,8 +28,8 @@ const getWorkouts = (allWorkouts) => ({
   });
 
 
-// Thunk Middleware
 
+// Thunk Middleware
 export const getAllWorkoutsThunk = () => async (dispatch) => {
     const response = await fetch("/api/workouts/");
 
@@ -44,17 +44,38 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
   };
 
   export const getWorkoutByIdThunk = (workoutId) => async (dispatch) => {
-    const response = await fetch(`/api/workouts/${workoutId}`);
+    try {
+      const response = await fetch(`/api/workouts/${workoutId}`);
 
-    if (response.ok) {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
       const workout = await response.json();
       if (workout.errors) {
         return workout.errors;
+      } else {
+        dispatch(getWorkout(workout));
       }
-
-      dispatch(getWorkout(workout));
+    } catch (error) {
+      console.error("Error fetching workout by ID:", error);
+      // Handle the error, e.g., dispatch an action to store the error state
     }
   };
+  // export const getWorkoutByIdThunk = (workoutId) => async (dispatch) => {
+  //   const response = await fetch(`/api/workouts/${workoutId}`);
+
+  //   if (response.ok) {
+  //     const workout = await response.json();
+  //     if (workout.errors) {
+  //       return workout.errors;
+  //     } else {
+
+  //       dispatch(getWorkout(workout));
+  //     }
+
+  //   }
+  // };
 
   export const createWorkout = (payload) => async (dispatch) => {
     const response = await fetch("/api/workouts/create", {
@@ -71,10 +92,6 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
       return error
     }
 
-  //   if (response.ok) {
-  //     const createdAlbum = await response.json();
-  //     dispatch(addAlbum(createdAlbum));
-  //   }
   };
 
   export const editWorkout = (payload) => async (dispatch) => {
@@ -92,11 +109,6 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
       return error
     }
 
-    // if (response.ok) {
-    //   const updatedAlbum = await response.json();
-    //   dispatch(updateAlbum(updatedAlbum));
-    //   return updatedAlbum;
-    // }
   };
 
   export const removeWorkout = (workoutId) => async (dispatch) => {
@@ -109,8 +121,9 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
     }
   };
 
-// Reducer Function
 
+
+// Reducer Function
 const initialState = {};
 
 export default function reducer(state = initialState, action) {

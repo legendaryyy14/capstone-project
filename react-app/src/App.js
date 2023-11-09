@@ -7,6 +7,13 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import WorkoutsPage from "./components/WorkoutsPage"
 import HomeRedirectPage from "./components/HomeRedirectPage";
+import OneWorkoutPage from "./components/OneWorkoutPage";
+import MyExercisesPage from "./components/MyExercisesPage";
+import MyWorkoutsPage from "./components/MyWorkoutsPage";
+import CreateExerciseForm from "./components/CreateExerciseForm";
+import CreateWorkoutForm from "./components/CreateWorkoutForm";
+import UpdateExerciseForm from "./components/UpdateExerciseForm";
+import UpdateWorkoutForm from "./components/UpdateWorkoutForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,14 +39,35 @@ function App() {
       )}
       {isLoaded && (
         <Switch>
-          <Route path="/login" >
+          {/* <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route> */}
+          <Route path="/workouts/create">
+            <CreateWorkoutForm />
+          </Route>
+          <Route path="/workouts/:workoutId/update">
+            <UpdateWorkoutForm />
+          </Route>
+          <Route path="/workouts/:workoutId">
+            <OneWorkoutPage />
           </Route>
           <Route path="/workouts">
             <WorkoutsPage />
+          </Route>
+          <Route path="/my-workouts">
+            <MyWorkoutsPage />
+          </Route>
+          <Route path="/exercises/create">
+            <CreateExerciseForm />
+          </Route>
+          <Route path="/exercises/:exerciseId">
+            <UpdateExerciseForm />
+          </Route>
+          <Route path="/my-exercises">
+            <MyExercisesPage />
           </Route>
         </Switch>
       )}
