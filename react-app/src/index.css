@@ -21,6 +21,72 @@
     display: none;
   }
 
+  .modal {
+    background-color: black;
+
+  }
+
+  .login-modal {
+    border: 2px solid #323131; /* Set your desired border style */
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-right: 15px;
+    margin-top: 40px;
+    padding-left: 20px;
+    /* padding: 12px; */
+    box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6)
+  }
+
+  .login-modal button {
+    display: flexbox;
+    background: none;
+    border: 1px solid rgb(44, 42, 42);
+    border-radius: 10px;
+    box-shadow: 2px 4px 4px rgba(148, 124, 15, 0.6);
+    padding: 10px 10px;
+    font-size: 14px;
+    color: white; /* Set your desired color */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom: 10px;
+  }
+
+  .login-modal input {
+    margin-left: 10px
+  }
+
+  .signup-modal {
+    background-color: black;
+    border: 2px solid #323131; /* Set your desired border style */
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-right: 15px;
+    margin-top: 40px;
+    padding-left: 20px;
+    /* padding: 12px; */
+    box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6)
+  }
+
+  .signup-modal form {
+    /* justify-items: baseline; */
+  }
+
+  .signup-modal label {
+    margin-bottom: 10px;
+    /* justify-content: space-between; */
+  }
+
+  .signup-modal input {
+    margin-left: 10px
+  }
+
+  .root {
+    align-items: center;
+  }
+
+  button .delete:hover {
+    color: rgb(37, 5, 5);
+  }
+
   a, h1, h2, p, div {
     color: white;
     text-decoration: none;

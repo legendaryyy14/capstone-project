@@ -5,7 +5,7 @@ import {  createExercise } from "../../store/exercises";
 import { getAllWorkoutsThunk } from "../../store/workouts";
 
 
-function CreateWorkoutForm() {
+function CreateExerciseForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const userId = useSelector((state) => state.session.user.id);
@@ -13,7 +13,8 @@ function CreateWorkoutForm() {
     const myWorkouts = Object.values(workoutObj).filter(workout => workout?.user_id === userId)
 
     const [addToExistingWorkout, setAddToExistingWorkout] = useState(false);
-    const [selectedWorkoutId, setSelectedWorkoutId] = useState(null);    const [title, setTitle] = useState("");
+    const [selectedWorkoutId, setSelectedWorkoutId] = useState(null);
+    const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [sets, setSets ] = useState("");
     const [reps, setReps ] = useState("");
@@ -165,7 +166,7 @@ function CreateWorkoutForm() {
             type="submit"
             disabled={ !description || !imageUrl}
           >
-            Create Workout
+            Create Exercise
           </button>
         </form>
       </div>
@@ -173,4 +174,4 @@ function CreateWorkoutForm() {
 
 }
 
-export default CreateWorkoutForm;
+export default CreateExerciseForm;

@@ -46,6 +46,10 @@ function CreateWorkoutForm() {
     setIsPublic(!isPublic); // Toggle the checkbox state when it's clicked
     }
 
+    const handleCancelButton = () => {
+      history.goBack();
+    };
+
     return (
         <div>
         <form className="form" onSubmit={handleSubmit}>
@@ -107,6 +111,11 @@ function CreateWorkoutForm() {
             disabled={ !description || !imageUrl}
           >
             Create Workout
+          </button>
+          <button
+            onClick={() => handleCancelButton()}
+          >
+            Cancel
           </button>
         </form>
       </div>

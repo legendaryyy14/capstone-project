@@ -1,4 +1,4 @@
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useModal } from "../../context/Modal";
 import { removeWorkout } from '../../store/workouts';

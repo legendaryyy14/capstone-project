@@ -3,3 +3,7 @@
     display:flex;
     margin-left: 0px auto; /* Center the logo */
   }
+
+.workout-nav-link:hover {
+  color: gray;
+}

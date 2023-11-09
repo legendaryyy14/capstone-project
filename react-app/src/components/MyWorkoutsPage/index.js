@@ -43,13 +43,14 @@ function MyWorkoutsPage() {
               className="workout-tile"
               to={`/workouts/${workout.id}`}
             >
+              <h2>{`${workout.title} by ${user.username}`}</h2>
+              <p>Public: {`${workout?.public}`}</p>
               <img
                 className="workout-img"
                 src={`${workout.image_url}`}
                 alt="workout-cover"
                 title={`${workout.title}`}
               />
-              <h2>{`${workout.title} by ${user.username}`}</h2>
               <p>{`${workout.description}`}</p>
             </NavLink>
 

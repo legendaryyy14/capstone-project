@@ -29,7 +29,7 @@ function HomeRedirectPage() {
     if (data) {
       setErrors(data);
     }
-    history.push("/");
+    history.push("/workouts");
   };
 
   const handleDemoLogin = async (e) => {
@@ -38,24 +38,24 @@ function HomeRedirectPage() {
     if (data) {
       setErrors(data);
     }
-    history.push("/");
+    history.push("/workouts");
   };
 
   return (
-    <div
+    <div className="login-modal"
       style={{
         backgroundColor: "black",
         color: "white",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        height: "50vh", // 100% of the viewport height
-        width: "50vw",
-        borderRadius: "15px",
-        marginTop: "100px",
+        // height: "80px", // 100% of the viewport height
+        // width: "50vw",
+        margin: "300px",
+        // marginTop: "100px",
       }}
     >
-      <h1>Log in to Flexy</h1>
+      <h1 style={{ textAlign: "center" }}>Log in to Flexy</h1>
       <form
         className="home-page-form"
         onSubmit={handleSubmit}
@@ -97,18 +97,19 @@ function HomeRedirectPage() {
         >
           <button
             type="submit"
-            style={{ marginBottom: "20px", marginRight: "20px", color: "white" }}
+            // style={{ marginBottom: "20px", marginRight: "20px", color: "white" }}
           >
             Log In
           </button>
 
           <OpenModalButton
+            className="signup-modal"
             buttonText="Sign up"
             onItemClick={closeMenu}
             modalComponent={<SignupFormModal/>}
           />
 
-          <button className="demo-button" type="button" onClick={handleDemoLogin} style={{ marginBottom: "20px", marginRight: "20px", color: "white" }}>Demo User</button>
+          <button className="demo-button" type="button" onClick={handleDemoLogin} >Demo User</button>
 
         </div>
       </form>

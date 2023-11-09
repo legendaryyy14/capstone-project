@@ -39,12 +39,12 @@ function App() {
       )}
       {isLoaded && (
         <Switch>
-          <Route path="/login" >
+          {/* <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
-          </Route>
+          </Route> */}
           <Route path="/workouts/create">
             <CreateWorkoutForm />
           </Route>

@@ -64,6 +64,7 @@ def update_exercise(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         exercise = Exercise.query.get(id)
+        exercise.workout_id = form.data['workout_id']
         exercise.title = form.data['title']
         exercise.description = form.data['description']
         exercise.sets = form.data['sets']

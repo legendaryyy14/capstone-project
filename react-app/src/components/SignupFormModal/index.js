@@ -30,14 +30,22 @@ function SignupFormModal() {
 	};
 
 	return (
-		<>
-			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
+		<div className="signup-modal">
+			<h1 style={{ textAlign: "center" }}>Sign Up</h1>
+			<form onSubmit={handleSubmit}
+				style={{
+          			display: "flex",
+          			flexDirection: "column",
+					justifyContent: "space-evenly"
+
+        			}}>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}
 				</ul>
+
+				{/* <div className="signup-labels"> */}
 				<label>
 					Email
 					<input
@@ -74,9 +82,11 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+
+				{/* </div> */}
 				<button type="submit">Sign Up</button>
 			</form>
-		</>
+		</div>
 	);
 }
 

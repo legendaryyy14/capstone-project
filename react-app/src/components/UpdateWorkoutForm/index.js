@@ -47,11 +47,14 @@ function UpdateWorkoutForm() {
       }, [isPublic]);
 
     const handleCheckboxChange = () => {
-    console.log(isPublic)
     setIsPublic(!isPublic);
-    console.log(isPublic)
      // Toggle the checkbox state when it's clicked
     }
+
+    const handleCancelButton = () => {
+      history.goBack();
+    };
+
 
     return (
 <div>
@@ -114,6 +117,12 @@ function UpdateWorkoutForm() {
             disabled={ !description || !imageUrl}
           >
             Update Workout
+          </button>
+
+          <button
+            onClick={() => handleCancelButton()}
+          >
+            Cancel
           </button>
         </form>
       </div>
