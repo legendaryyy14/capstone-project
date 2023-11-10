@@ -37,7 +37,7 @@ function CreateExerciseForm() {
         setErrors({});
         const payload = {
           user_id: userId,
-          workout_id: addToExistingWorkout ? selectedWorkoutId : null,
+          workout_id: addToExistingWorkout ? selectedWorkoutId : "",
           title,
           description,
           sets,

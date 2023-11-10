@@ -64,9 +64,10 @@ function UpdateExerciseForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
+        const normalizedWorkoutId = selectedWorkoutId !== null ? selectedWorkoutId : "";
         const payload = {
             id: exercise?.id,
-            workout_id: selectedWorkoutId,
+            workout_id: normalizedWorkoutId,
             user_id: userId,
             title,
             description,
