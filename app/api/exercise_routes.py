@@ -40,6 +40,12 @@ def create_exercise():
     """
     form = ExerciseForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+   # Check if workout_id is present and not null
+    # if 'workout_id' in request.json and request.json['workout_id'] is not None:
+    #     workout_id = request.json['workout_id']
+    # else:
+    #     workout_id = None  # Set a default value if needed
+    print("HEREEEE:", form.data)
     if form.validate_on_submit():
         exercise = Exercise(
             workout_id = form.data['workout_id'],

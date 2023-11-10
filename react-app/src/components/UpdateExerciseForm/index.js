@@ -16,7 +16,7 @@ function UpdateExerciseForm() {
     const myWorkouts = Object.values(workoutObj).filter(workout => workout?.user_id === userId)
 
     const [addToExistingWorkout, setAddToExistingWorkout] = useState(false);
-    const [selectedWorkoutId, setSelectedWorkoutId] = useState("");
+    const [selectedWorkoutId, setSelectedWorkoutId] = useState(exercise?.workout_id);
     const [title, setTitle] = useState(exercise?.title);
     const [description, setDescription] = useState(exercise?.description);
     const [sets, setSets ] = useState(exercise?.sets);
@@ -66,15 +66,14 @@ function UpdateExerciseForm() {
         setErrors({});
         const payload = {
             id: exercise?.id,
-            user_id: userId,
             workout_id: selectedWorkoutId,
+            user_id: userId,
             title,
             description,
             sets,
             reps,
             image_url: imageUrl
         };
-
         const res = await dispatch(editExercise(payload));
 
         if (res && res?.errors) {
@@ -130,12 +129,13 @@ function UpdateExerciseForm() {
             <div className="form-row">
               Sets
             </div>
-            <input
-              type="text"
-              placeholder="Sets"
-              value={sets}
-              onChange={updateSets}
-            />
+            <select value={sets} onChange={updateSets}>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
+          </select>
             <p className="errors" style={{color:"red", fontSize:11}}>{errors.sets}</p>
           </label>
 
@@ -143,12 +143,13 @@ function UpdateExerciseForm() {
             <div className="form-row">
               Reps
             </div>
-            <input
-              type="text"
-              placeholder="Reps"
-              value={reps}
-              onChange={updateReps}
-            />
+            <select value={reps} onChange={updateReps}>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
+          </select>
             <p className="errors" style={{color:"red", fontSize:11}}>{errors.reps}</p>
           </label>
 
