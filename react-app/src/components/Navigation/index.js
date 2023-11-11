@@ -26,9 +26,9 @@ function Navigation({ isLoaded }){
 			<NavLink to="/workouts">
 				All Workouts
 			</NavLink>
-			<NavLink to="/workouts/liked">
+			{/* <NavLink to="/workouts/liked">
 				Liked Workouts
-			</NavLink>
+			</NavLink> */}
 			<NavLink to="/my-workouts">
 				My Workouts
 			</NavLink>

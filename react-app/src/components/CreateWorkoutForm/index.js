@@ -96,7 +96,7 @@ function CreateWorkoutForm() {
 
           <label>
             <div className="form-row">
-              Public?
+              Public: Do you want this workout to be seen by all users?
             </div>
             <input
               type="checkbox"

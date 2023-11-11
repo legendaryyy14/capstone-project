@@ -2,10 +2,13 @@
 
   button {
     background-color: black;
-    border: 0px;
+    border: 2px solid #323131;
+    border-radius: 10px;
+    box-shadow: 2px 4px 4px rgba(148, 124, 15, 0.6);
     cursor: pointer;
     color: white;
-    padding: 10px;
+    padding: 3px;
+    margin: 5px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: large;
 
@@ -13,9 +16,8 @@
 
   button:hover {
     color: gray;
-    border: white
+    border: 2px solid #323131
   }
-
 
   .hidden {
     display: none;
@@ -85,6 +87,17 @@
 
   button .delete:hover {
     color: rgb(37, 5, 5);
+  }
+
+  .faves {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    flex-direction: row;
+  }
+
+  .faves i {
+    margin-right: 5px; /* Add some spacing between the heart icon and the count */
+    /* color: red; */
   }
 
   a, h1, h2, p, div {
