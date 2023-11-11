@@ -13,11 +13,11 @@ function CreateExerciseForm() {
     const myWorkouts = Object.values(workoutObj).filter(workout => workout?.user_id === userId)
 
     const [addToExistingWorkout, setAddToExistingWorkout] = useState(false);
-    const [selectedWorkoutId, setSelectedWorkoutId] = useState(null);
+    const [selectedWorkoutId, setSelectedWorkoutId] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [sets, setSets ] = useState("");
-    const [reps, setReps ] = useState("");
+    const [sets, setSets ] = useState(1);
+    const [reps, setReps ] = useState(1);
     const [imageUrl, setImageUrl] = useState("");
     const [errors, setErrors] = useState({});
 
@@ -37,21 +37,21 @@ function CreateExerciseForm() {
         setErrors({});
         const payload = {
           user_id: userId,
-          workout_id: addToExistingWorkout ? selectedWorkoutId : null,
+          workout_id: addToExistingWorkout ? selectedWorkoutId : "",
           title,
           description,
           sets,
           reps,
           image_url: imageUrl
         };
-
+console.log(payload)
 
         const res = await dispatch(createExercise(payload));
 
-        if (res && res.errors) {
-            setErrors(res.errors);
+        if (res && res?.errors) {
+            setErrors(res?.errors);
         } else if (res?.workout_id) {
-            history.push(`/workouts/${res.workout_id}`);
+            history.push(`/workouts/${res?.workout_id}`);
         } else {
             history.push(`/my-exercises`);
         }
@@ -102,12 +102,13 @@ function CreateExerciseForm() {
             <div className="form-row">
               Sets
             </div>
-            <input
-              type="text"
-              placeholder="Sets"
-              value={sets}
-              onChange={updateSets}
-            />
+            <select value={sets} onChange={updateSets}>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
+          </select>
             <p className="errors" style={{color:"red", fontSize:11}}>{errors.sets}</p>
           </label>
 
@@ -115,12 +116,13 @@ function CreateExerciseForm() {
             <div className="form-row">
               Reps
             </div>
-            <input
-              type="text"
-              placeholder="Reps"
-              value={reps}
-              onChange={updateReps}
-            />
+            <select value={reps} onChange={updateReps}>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
+          </select>
             <p className="errors" style={{color:"red", fontSize:11}}>{errors.reps}</p>
           </label>
 
@@ -152,8 +154,8 @@ function CreateExerciseForm() {
             <select value={selectedWorkoutId} onChange={handleDropdownChange}>
               <option value={null}>Select a workout</option>
               {myWorkouts.map((workout) => (
-                <option key={workout.id} value={workout.id}>
-                  {workout.title}
+                <option key={workout?.id} value={workout?.id}>
+                  {workout?.title}
                 </option>
               ))}
             </select>
