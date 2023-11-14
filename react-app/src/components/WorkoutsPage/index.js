@@ -30,21 +30,22 @@ function WorkoutsPage() {
         <h1>All Workouts</h1>
         <div className="workout-wrapper">
           {workouts?.map((workout) => (
-            <div>
+            <div className="workout" key={workout?.id}>
+              <h2>{`${workout?.title}`}</h2>
+              <p>{`by ${users?.filter(user => user?.id === workout?.user_id)[0].username}`}</p>
             <NavLink
               key={workout?.id}
               className="workout-tile"
               to={`/workouts/${workout?.id}`}
             >
-              <h2>{`${workout?.title} by ${users?.filter(user => user?.id === workout?.user_id)[0].username}`}</h2>
               <img
                 className="workout-img"
                 src={`${workout?.image_url}`}
                 alt="workout-cover"
                 title={`${workout?.title}`}
               />
-              <p>{`${workout?.description}`}</p>
             </NavLink>
+              <p>{`${workout?.description}`}</p>
 
             {/* <p className="faves">
               <FaveButton

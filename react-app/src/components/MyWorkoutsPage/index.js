@@ -28,6 +28,7 @@ function MyWorkoutsPage() {
 
     return (
         <div className="my-workouts-page">
+        <div className="space-under-title">
         <h1>My Workouts</h1>
         <button
             className="create-workout-button"
@@ -35,24 +36,27 @@ function MyWorkoutsPage() {
             >
                 Create a Workout
             </button>
+
+        </div>
         <div className="workout-wrapper">
           {myWorkouts.map((workout) => (
-            <div>
-            <NavLink
+            <div className="workout">
+              <h2>{`${workout?.title}`}</h2>
+              <p>{`by ${user?.username}`}</p>
+              <p>Public: {workout?.public ? (<span>yes</span>) : (<span>no</span>)}</p>
+              <NavLink
               key={workout.id}
               className="workout-tile"
               to={`/workouts/${workout.id}`}
             >
-              <h2>{`${workout.title} by ${user.username}`}</h2>
-              <p>Public: {`${workout?.public}`}</p>
               <img
                 className="workout-img"
                 src={`${workout.image_url}`}
                 alt="workout-cover"
                 title={`${workout.title}`}
               />
-              <p>{`${workout.description}`}</p>
             </NavLink>
+              <p>{`${workout.description}`}</p>
 
             <button className="update-btn" onClick={() => handleUpdateClick(workout.id)}>
               Update

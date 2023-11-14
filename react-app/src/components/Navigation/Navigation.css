@@ -10,7 +10,8 @@
   border-radius: 10px;
   padding-top: 5px;
   padding-right: 15px;
-  margin-top: 40px;
+  margin-top: 60px;
+  margin-right: 28px;
   padding-left: 20px;
   /* padding: 12px; */
   box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6); /* Set your desired box-shadow */
@@ -24,7 +25,7 @@
   border: 1px solid rgb(44, 42, 42);
   border-radius: 10px;
   box-shadow: 2px 4px 4px rgba(148, 124, 15, 0.6);
-  padding: 10px 10px;
+  padding: 10px 10px 10px;
   font-size: 14px;
   color: white; /* Set your desired color */
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -43,6 +44,10 @@ li {
   margin-left: 0px auto; /* Center the logo */
 }
 
+.navigation-container .space-filler {
+  margin-left: 30px;
+}
+
 .user-logo {
   width: 20px; /* Adjust the width to your desired size */
   display:flex;
@@ -59,11 +64,11 @@ li {
 
 .nav-menu {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items:flex-start;
   padding: 40px 20px 40px 10px; /* Adjust padding as needed */
-  /* background-color: black; */
   border-bottom: 1px solid rgba(147, 145, 138, 0.6);
+  position: sticky;
 }
 
 .nav-menu a {

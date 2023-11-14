@@ -69,6 +69,9 @@ function App() {
           <Route path="/my-exercises">
             <MyExercisesPage />
           </Route>
+          <Route exact path="/">
+            <WorkoutsPage />
+          </Route>
         </Switch>
       )}
     </>

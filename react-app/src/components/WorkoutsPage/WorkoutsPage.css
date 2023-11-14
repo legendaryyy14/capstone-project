@@ -1,9 +1,40 @@
-.workout-img {
-    width: 370px; /* Adjust the width to your desired size */
-    display:flex;
-    margin-left: 0px auto; /* Center the logo */
-  }
+/* WorkoutsPage.css */
 
-.workouts-page {
-    background-color: black;
+.workouts-page, .my-workouts-page {
+  text-align: center;
+}
+
+.workout-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.workout {
+  width: calc(33.333% - 20px); /* Set the width of each column with some margin for spacing */
+  margin-top: 15px;
+  margin-right: 1px;
+  border: 2px solid #323131; /* Set your desired border style */
+  border-radius: 10px;
+  padding-right: 10px;
+}
+
+.workout-img {
+  max-width: 100%;
+  height: auto;
+  /* margin-right: 5px; */
+}
+
+/* Media query for smaller screens, two columns */
+@media (max-width: 700px) {
+  .workout {
+    width: calc(50% - 20px);
+  }
+}
+
+/* Media query for even smaller screens, one column */
+@media (max-width: 576px) {
+  .workout {
+    width: 100%;
+  }
 }

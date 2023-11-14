@@ -39,7 +39,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button className='profile-btn' onClick={openMenu}>
         <img src="/userbutton.png" alt="User" className="user-logo" />
       </button>
       <ul className={ulClassName} ref={ulRef}>

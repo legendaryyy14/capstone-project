@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import DeleteExerciseModal from "../DeleteExerciseModal";
 
+
 function MyExercisesPage() {
     const dispatch = useDispatch();
     const history = useHistory()
@@ -46,6 +47,8 @@ function MyExercisesPage() {
 
     return (
         <div className="exercise-page">
+
+            <div className="space-under-title">
             <h1>My Exercises</h1>
 
             <button
@@ -54,6 +57,8 @@ function MyExercisesPage() {
             >
                 Create an exercise
             </button>
+
+            </div>
 
             <div className="exercise-wrapper">
             {myExercises.map((exercise) => (

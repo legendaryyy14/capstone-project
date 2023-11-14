@@ -10,7 +10,7 @@ function Navigation({ isLoaded }){
 	return (
 		<div>
 		<div className='navigation-container'>
-			<div></div>
+			<div className='space-filler'></div>
 
           <NavLink to="/">
             <img src="/FLEXY.png" alt="Home" className="home-logo" />
