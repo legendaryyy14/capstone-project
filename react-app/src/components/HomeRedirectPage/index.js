@@ -43,17 +43,8 @@ function HomeRedirectPage() {
 
   return (
     <div className="login-modal"
-      style={{
-        backgroundColor: "black",
-        color: "white",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        // height: "80px", // 100% of the viewport height
-        // width: "50vw",
-        margin: "300px",
-        // marginTop: "100px",
-      }}
+
+
     >
       <h1 style={{ textAlign: "center" }}>Log in to Flexy</h1>
       <form
@@ -101,6 +92,7 @@ function HomeRedirectPage() {
           >
             Log In
           </button>
+
 
           <OpenModalButton
             className="signup-modal"

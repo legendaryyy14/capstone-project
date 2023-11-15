@@ -30,11 +30,12 @@
   .workout-img {
     border-radius: 10px;
     border: 2px solid #323131;
+    transition: transform 0.3s, box-shadow 0.3s;
   }
 
   .workout-img:hover {
     box-shadow: 2px 4px 4px rgba(148, 124, 15, 0.6);
-  }
+    transform: translateY(-5px);  }
 
   .exercise-img {
     border-radius: 10px;
@@ -65,14 +66,15 @@
   }
 
   .login-modal {
+    background-color: black;
     border: 2px solid #323131; /* Set your desired border style */
     border-radius: 10px;
-    padding-top: 5px;
-    padding-right: 15px;
-    margin-top: 40px;
-    padding-left: 20px;
-    /* padding: 12px; */
-    box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6)
+    box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
   }
 
   .login-modal button {
@@ -92,7 +94,7 @@
     margin-left: 10px
   }
 
-  .signup-modal {
+  .signup-modal, .modal {
     background-color: black;
     border: 2px solid #323131; /* Set your desired border style */
     border-radius: 10px;
@@ -104,9 +106,6 @@
     box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6)
   }
 
-  .signup-modal form {
-    /* justify-items: baseline; */
-  }
 
   .signup-modal label {
     margin-bottom: 10px;
@@ -116,6 +115,8 @@
   .signup-modal input {
     margin-left: 10px
   }
+
+
 
   .root {
     align-items: center;
@@ -141,7 +142,14 @@
     text-decoration: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 5px;
+    margin: 2px;
 
+  }
+
+  .note {
+    font-style: italic;
+    color: gray;
+    font-size: small;
   }
 
 

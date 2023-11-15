@@ -4,6 +4,8 @@ from app.models import Workout, Favorite, db
 from app.forms.workout_form import WorkoutForm
 from app.forms.workout_edit_form import WorkoutEditForm
 from .auth_routes import validation_errors_to_error_messages
+from app.api.aws import (
+    upload_file_to_s3, get_unique_filename)
 
 workout_routes = Blueprint('workouts', __name__)
 
@@ -47,12 +49,26 @@ def create_workout():
     form = WorkoutForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+
+        image = form.data["image_url"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print(upload)
+
+        if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message (and we printed it above)
+            return {"errors": upload.errors}
+
+        url = upload["url"]
+
         workout = Workout(
             user_id = form.data['user_id'],
             title = form.data['title'],
             description = form.data['description'],
             public = form.data['public'],
-            image_url = form.data['image_url']
+            image_url = url
         )
         db.session.add(workout)
         db.session.commit()

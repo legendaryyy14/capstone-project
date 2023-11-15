@@ -101,8 +101,7 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
   export const createWorkout = (payload) => async (dispatch) => {
     const response = await fetch("/api/workouts/create", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: payload,
     });
 
     try {
