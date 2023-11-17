@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Create columns that adjust based on browser size */
   gap: 10px; /* Adjust the gap between spots */
-  margin-top: 60px; /* Add margin to the top */
+  margin-top: 30px; /* Add margin to the top */
   /* display: flex;
   flex-wrap: wrap;
   justify-content: space-around; */
@@ -27,8 +27,9 @@
 
 .workout-img {
   max-width: 100%;
-  height: auto;
-  /* margin-right: 5px; */
+  height: 200px;
+  width: 400px;
+  object-fit: cover;
 }
 
 /* Media query for smaller screens, two columns */

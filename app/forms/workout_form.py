@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, IntegerField, BooleanField
-from wtforms.validators import DataRequired, Length, URL
+from wtforms.validators import DataRequired, Length
 from app.api.aws import ALLOWED_EXTENSIONS
 
 class WorkoutForm(FlaskForm):

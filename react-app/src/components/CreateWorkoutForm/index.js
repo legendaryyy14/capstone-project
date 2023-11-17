@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {  createWorkout } from "../../store/workouts";
@@ -36,7 +36,6 @@ function CreateWorkoutForm() {
         formData.append("public", isPublic);
         formData.append("description", description);
         setImageLoading(true);
-        await dispatch(createWorkout(formData));
 
         try {
           const response = await dispatch(createWorkout(formData));

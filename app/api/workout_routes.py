@@ -5,7 +5,7 @@ from app.forms.workout_form import WorkoutForm
 from app.forms.workout_edit_form import WorkoutEditForm
 from .auth_routes import validation_errors_to_error_messages
 from app.api.aws import (
-    upload_file_to_s3, get_unique_filename)
+    upload_file_to_s3, get_unique_filename, remove_file_from_s3)
 
 workout_routes = Blueprint('workouts', __name__)
 
@@ -50,6 +50,7 @@ def create_workout():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
 
+        #AWS Steps
         image = form.data["image_url"]
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
@@ -87,10 +88,25 @@ def update_workout(id):
         workout.title = form.data['title']
         workout.description = form.data['description']
         workout.public = form.data['public']
-        workout.image_url = form.data['image_url']
+    # Check if a new image is provided
+    if 'image_url' in request.files:
+        new_image = request.files['image_url']
+        new_image.filename = get_unique_filename(new_image.filename)
+
+        # Remove the old image from S3
+        remove_file_from_s3(workout.image_url)
+
+        # Upload the new image to S3
+        upload = upload_file_to_s3(new_image)
+
+        if "url" not in upload:
+            return {"errors": upload.errors}
+
+        workout.image_url = upload["url"]
 
         db.session.commit()
         return workout.to_dict()
+
     return {'errors': form.errors}, 400
 
 
@@ -103,10 +119,12 @@ def delete_workout(id):
     if workout is None:
         return {"error": "Workout does not exist"}, 404
 
-    db.session.delete(workout)
+    remove_file_from_s3(workout.image_url)
 
+    db.session.delete(workout)
     db.session.commit()
     return workout.to_dict()
+
 
 #GET ALL OF LOGGED IN USER'S FAVORITED WORKOUTS
 @workout_routes.route('/favorites/<int:user_id>')

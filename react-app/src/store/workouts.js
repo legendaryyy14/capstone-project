@@ -117,12 +117,12 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
   export const editWorkout = (payload) => async (dispatch) => {
     const response = await fetch(`/api/workouts/${payload.id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: payload,
     });
 
     try {
       const updatedWorkout = await response.json();
+
       dispatch(updateWorkout(updatedWorkout));
       return updatedWorkout
     } catch(error) {
