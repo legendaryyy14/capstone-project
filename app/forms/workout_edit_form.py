@@ -8,4 +8,4 @@ class WorkoutEditForm(FlaskForm):
     title = StringField('title', validators=[DataRequired(), Length(min=3, max=50)])
     description = StringField('description', validators=[DataRequired(), Length(min=3, max=255)])
     public = BooleanField('public')
-    image_url = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    image_url = FileField("Image File", validators=[ FileAllowed(list(ALLOWED_EXTENSIONS))])

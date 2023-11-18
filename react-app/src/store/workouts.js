@@ -115,7 +115,7 @@ export const getAllWorkoutsThunk = () => async (dispatch) => {
   };
 
   export const editWorkout = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/workouts/${payload.id}`, {
+    const response = await fetch(`/api/workouts/${payload.get('id')}`, {
       method: "PUT",
       body: payload,
     });

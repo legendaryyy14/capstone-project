@@ -88,26 +88,27 @@ def update_workout(id):
         workout.title = form.data['title']
         workout.description = form.data['description']
         workout.public = form.data['public']
-    # Check if a new image is provided
-    if 'image_url' in request.files:
-        new_image = request.files['image_url']
-        new_image.filename = get_unique_filename(new_image.filename)
+        # Check if a new image is provided
+        if 'image_url' in request.files:
+            new_image = request.files['image_url']
+            new_image.filename = get_unique_filename(new_image.filename)
 
-        # Remove the old image from S3
-        remove_file_from_s3(workout.image_url)
+            # Remove the old image from S3
+            remove_file_from_s3(workout.image_url)
 
-        # Upload the new image to S3
-        upload = upload_file_to_s3(new_image)
+            # Upload the new image to S3
+            upload = upload_file_to_s3(new_image)
 
-        if "url" not in upload:
-            return {"errors": upload.errors}
 
-        workout.image_url = upload["url"]
+            if "url" not in upload:
+                return {"errors": upload.errors}
+
+            workout.image_url = upload["url"]
 
         db.session.commit()
         return workout.to_dict()
 
-    return {'errors': form.errors}, 400
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 # DELETE A WORKOUT

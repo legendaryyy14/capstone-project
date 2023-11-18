@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { editWorkout } from "../../store/workouts";
+import { getWorkoutByIdThunk, editWorkout } from "../../store/workouts";
 
 function UpdateWorkoutForm() {
     const dispatch = useDispatch();
@@ -10,10 +10,10 @@ function UpdateWorkoutForm() {
     const { workoutId } = useParams();
     const workout = useSelector((state) => state.workouts[workoutId])
 
-    const [title, setTitle] = useState(workout?.title);
-    const [description, setDescription] = useState(workout?.description);
-    const [isPublic, setIsPublic] = useState(workout?.public);
-    const [image, setImage] = useState(null);
+    const [title, setTitle] = useState(workout?.title || "");
+    const [description, setDescription] = useState(workout?.description || "");
+    const [isPublic, setIsPublic] = useState(workout?.public || false);
+    const [image, setImage] = useState(workout?.image_url);
     const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState({});
     const [generalError, setGeneralError] = useState("");
@@ -24,8 +24,8 @@ function UpdateWorkoutForm() {
 
     useEffect(() => {
       // Set the initial value when the workout changes
-      setImage(workout?.image_url || null);
-    }, [workout]);
+      setImage(workout?.image_url || "");
+    }, [setImage, workout]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,16 +34,21 @@ function UpdateWorkoutForm() {
 
         const formData = new FormData();
         formData.append("id", workoutId);
-        formData.append("image_url", image);
         formData.append("user_id", userId);
         formData.append("title", title);
         formData.append("public", isPublic);
         formData.append("description", description);
+        // Check if a new image has been selected
+        if (e.target.files?.[0]) {
+          formData.append("image_url", e.target.files[0]);
+        }
         setImageLoading(true);
+        console.log("Form Data Content:", Array.from(formData.entries()));
+
+
 
         try {
           const response = await dispatch(editWorkout(formData));
-          console.log(response)
           if (response && response?.errors) {
               setErrors(response?.errors);
           } else {
@@ -86,7 +91,6 @@ function UpdateWorkoutForm() {
       history.goBack();
     };
 
-
     return (
       <div>
         <form className="form" onSubmit={handleSubmit}>
@@ -96,6 +100,11 @@ function UpdateWorkoutForm() {
             <div className="form-row">
               Title
             </div>
+            {generalError && (
+              <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                  {generalError}
+              </p>
+            )}
             <input
               type="text"
               placeholder="Title"
@@ -131,13 +140,13 @@ function UpdateWorkoutForm() {
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={(e) => setImage(e.target.files?.[0])}
             />
-                  {errors.image_url && (
+                  {/* {errors.image_url && (
                       <p className="errors" style={{ color: "red", fontSize: 11 }}>
                           {errors.image_url}
                       </p>
-                  )}
+                  )} */}
           </label>
 
           <label>
