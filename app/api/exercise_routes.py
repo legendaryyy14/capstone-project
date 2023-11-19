@@ -87,24 +87,25 @@ def update_exercise(id):
         exercise.sets = form.data['sets']
         exercise.reps = form.data['reps']
 
-    if 'image_url' in request.files:
-        new_image = request.files['image_url']
-        new_image.filename = get_unique_filename(new_image.filename)
+        if 'image_url' in request.files:
+            new_image = request.files['image_url']
+            new_image.filename = get_unique_filename(new_image.filename)
 
-        # Remove the old image from S3
-        remove_file_from_s3(exercise.image_url)
+            # Remove the old image from S3
+            remove_file_from_s3(exercise.image_url)
 
-        # Upload the new image to S3
-        upload = upload_file_to_s3(new_image)
+            # Upload the new image to S3
+            upload = upload_file_to_s3(new_image)
+            print(upload)
 
-        if "url" not in upload:
-            return {"errors": upload.errors}
+            if "url" not in upload:
+                return {"errors": upload.errors}
 
-        exercise.image_url = upload["url"]
+            exercise.image_url = upload["url"]
 
         db.session.commit()
         return exercise.to_dict()
-    return {'errors': form.errors}, 400
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # DELETE AN EXERCISE
 @exercise_routes.route('/<int:id>', methods=['DELETE'])

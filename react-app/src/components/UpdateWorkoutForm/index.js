@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getWorkoutByIdThunk, editWorkout } from "../../store/workouts";
+import { editWorkout } from "../../store/workouts";
 
 function UpdateWorkoutForm() {
     const dispatch = useDispatch();
     const history = useHistory()
     const userId = useSelector((state) => state.session.user.id);
     const { workoutId } = useParams();
-    const workout = useSelector((state) => state.workouts[workoutId])
+    const workout = useSelector((state) => state?.workouts?.[workoutId])
 
     const [title, setTitle] = useState(workout?.title || "");
     const [description, setDescription] = useState(workout?.description || "");
@@ -20,11 +20,9 @@ function UpdateWorkoutForm() {
 
     const updateTitle = (e) => setTitle(e.target.value);
     const updateDescription = (e) => setDescription(e.target.value);
-    // const updateImageUrl = (e) => setImageUrl(e.target.value);
 
     useEffect(() => {
-      // Set the initial value when the workout changes
-      setImage(workout?.image_url || "");
+      setImage(workout.image_url || "");
     }, [setImage, workout]);
 
     const handleSubmit = async (e) => {
@@ -38,10 +36,8 @@ function UpdateWorkoutForm() {
         formData.append("title", title);
         formData.append("public", isPublic);
         formData.append("description", description);
-        // Check if a new image has been selected
-        if (e.target.files?.[0]) {
-          formData.append("image_url", e.target.files[0]);
-        }
+        formData.append("image_url", image);
+
         setImageLoading(true);
         console.log("Form Data Content:", Array.from(formData.entries()));
 
@@ -91,20 +87,21 @@ function UpdateWorkoutForm() {
       history.goBack();
     };
 
+
     return (
       <div>
         <form className="form" onSubmit={handleSubmit}>
           <h1>Update {`${workout?.title}`}</h1>
-
-          <label>
-            <div className="form-row">
-              Title
-            </div>
             {generalError && (
               <p className="errors" style={{ color: "red", fontSize: 11 }}>
                   {generalError}
               </p>
             )}
+
+          <label>
+            <div className="form-row">
+              Title
+            </div>
             <input
               type="text"
               placeholder="Title"
@@ -115,7 +112,8 @@ function UpdateWorkoutForm() {
                   <p className="errors" style={{ color: "red", fontSize: 11 }}>
                       {errors.title}
                   </p>
-              )}          </label>
+              )}
+              </label>
 
           <label>
             <div className="form-row">
@@ -131,7 +129,8 @@ function UpdateWorkoutForm() {
                     <p className="errors" style={{ color: "red", fontSize: 11 }}>
                         {errors.description}
                     </p>
-                )}          </label>
+                )}
+                </label>
 
           <label>
             <div className="form-row">

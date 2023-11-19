@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed, FileRequired
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, BooleanField
 from wtforms.validators import DataRequired, Length
 from app.api.aws import ALLOWED_EXTENSIONS

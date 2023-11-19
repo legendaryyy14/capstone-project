@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed, FileRequired
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, IntegerField
-from wtforms.validators import DataRequired, Length, URL, Optional
+from wtforms.validators import DataRequired, Length, Optional
 from app.api.aws import ALLOWED_EXTENSIONS
 
 class ExerciseEditForm(FlaskForm):
@@ -12,4 +12,4 @@ class ExerciseEditForm(FlaskForm):
     description = StringField('description', validators=[DataRequired(), Length(min=3, max=255)])
     sets = IntegerField('sets', validators=[DataRequired()])
     reps = IntegerField('reps', validators=[DataRequired()])
-    image_url = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    image_url = FileField("Image File", validators=[ FileAllowed(list(ALLOWED_EXTENSIONS))])

@@ -98,7 +98,7 @@ def update_workout(id):
 
             # Upload the new image to S3
             upload = upload_file_to_s3(new_image)
-
+            print(upload)
 
             if "url" not in upload:
                 return {"errors": upload.errors}
