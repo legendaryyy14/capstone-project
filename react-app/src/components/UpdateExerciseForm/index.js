@@ -44,7 +44,7 @@ function UpdateExerciseForm() {
         history.goBack();
       };
 
-    const getWorkoutTitle = (exerciseWorkoutId) => {
+    const getWorkoutTitle = () => {
 
         if (workout) {
           return (
@@ -124,7 +124,7 @@ function UpdateExerciseForm() {
 
             {
                 exercise?.workout_id ? (
-                    <p>Included in: {getWorkoutTitle(exercise?.workout_id)}</p>
+                    <p>Included in: {getWorkoutTitle()}</p>
                 ) : (
                     <p>Included in: None</p>
                 )
