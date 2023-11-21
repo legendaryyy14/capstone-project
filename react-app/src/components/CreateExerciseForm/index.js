@@ -113,6 +113,7 @@ function CreateExerciseForm() {
               Title
             </div>
             <input
+              className="text-input"
               type="text"
               placeholder="Title"
               value={title}
@@ -129,18 +130,20 @@ function CreateExerciseForm() {
             <div className="form-row">
               Description
             </div>
-            <input
-              type="text"
+            <textarea
+              className="description-textarea"
               placeholder="Description"
               value={description}
               onChange={updateDescription}
+              rows={4} // Adjust the number of rows as needed
             />
-              {errors.description && (
-                  <p className="errors" style={{ color: "red", fontSize: 11 }}>
-                      {errors.description}
-                  </p>
-              )}
-            </label>
+            {errors.description && (
+              <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                {errors.description}
+              </p>
+            )}
+          </label>
+
 
           <label>
             <div className="form-row">
@@ -168,23 +171,27 @@ function CreateExerciseForm() {
           </select>
           </label>
 
-          <label>
+          <label className="file-input-label">
             <div className="form-row">
               Exercise Photo
             </div>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => setImage(e.target.files[0])}
-            />
-              {errors.image_url && (
-                  <p className="errors" style={{ color: "red", fontSize: 11 }}>
-                      {errors.image_url}
-                  </p>
-              )}
+            <div className="file-input-container">
+              <input
+                className="choose-file"
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </div>
+            {errors.image_url && (
+              <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                {errors.image_url}
+              </p>
+            )}
           </label>
 
-          <label>
+          <div className='no-pad' style={{ display: 'flex', alignItems: 'center' }}>
+          <label className="checkbox">
           <div className="form-row">Add to existing workout?</div>
           <input
             type="checkbox"
@@ -192,6 +199,7 @@ function CreateExerciseForm() {
             onChange={handleCheckboxChange}
           />
         </label>
+        </div>
 
         {addToExistingWorkout && (
           <label>
@@ -210,6 +218,7 @@ function CreateExerciseForm() {
 
 
           <button
+            className="submit"
             type="submit"
           >
             Create Exercise

@@ -32,7 +32,7 @@ function WorkoutsPage() {
           {workouts?.map((workout) => (
             <div className="workout" key={workout?.id}>
               <h2>{`${workout?.title}`}</h2>
-              <p>{`by ${users?.filter(user => user?.id === workout?.user_id)[0].username}`}</p>
+              <p className='by'> {`by ${users?.filter(user => user?.id === workout?.user_id)[0].username}`}</p>
             <NavLink
               key={workout?.id}
               className="workout-tile"

@@ -1,0 +1,56 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+.text-input {
+    width: 210px;
+    margin-top: 0px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+
+.description-textarea {
+    font-size: 12px; /* Adjust the font size as needed */
+    width: 210px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 0px;
+    border-radius: 5px;
+    margin-left: 5px;
+  }
+
+select, option {
+    margin-top: 0px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+
+.form-row {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content:flex-start;
+  }
+
+label {
+    padding-bottom: 10px;
+}
+
+.submit {
+    padding: 10px 10px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  /* Add any additional styles for spacing, margin, etc. */
+}
+
+.checkbox input {
+  margin-left: 0px; /* Adjust the margin as needed */
+}

@@ -79,12 +79,21 @@ function UpdateExerciseForm() {
         formData.append("reps", reps);
         formData.append("image_url", image);
         setImageLoading(true);
-        console.log("Form Data Content:", Array.from(formData.entries()));
+        // console.log("Form Data Content:", Array.from(formData.entries()));
+
 
         try {
           const response = await dispatch(editExercise(formData));
           if (response && response?.errors) {
-              setErrors(response?.errors);
+            const parsedErrors = {};
+            response?.errors.forEach((error) => {
+              const [field, message] = error.split(' : ');
+              parsedErrors[field.trim()] = message.trim();
+            });
+
+            setErrors(parsedErrors);
+            // console.log("Setting Errors:", errors);
+
           } else if (response?.workout_id) {
                 history.push(`/workouts/${response?.workout_id}`);
             } else {
@@ -141,12 +150,12 @@ function UpdateExerciseForm() {
               Title
             </div>
             <input
+              className="text-input"
               type="text"
               placeholder="Title"
               value={title}
               onChange={updateTitle}
             />
-              <p className="errors" style={{color:"red", fontSize:11}}>{errors.title}</p>
           </label>
             {errors.title && (
               <p className="errors" style={{ color: "red", fontSize: 11 }}>
@@ -158,13 +167,13 @@ function UpdateExerciseForm() {
             <div className="form-row">
               Description
             </div>
-            <input
-              type="text"
+            <textarea
+              className="description-textarea"
               placeholder="Description"
               value={description}
               onChange={updateDescription}
+              rows={4} // Adjust the number of rows as needed
             />
-              <p className="errors" style={{color:"red", fontSize:11}}>{errors.description}</p>
           </label>
             {errors.description && (
               <p className="errors" style={{ color: "red", fontSize: 11 }}>
@@ -209,25 +218,35 @@ function UpdateExerciseForm() {
                 </label>
 
           <label>
-            <div className="form-row">
+
+          <div className="form-row" >
               Exercise Photo
             </div>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => setImage(e.target.files?.[0])}
-            />
+            <div className="file-input-container">
+              <input
+                className="choose-file"
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </div>
           </label>
 
             {
                 !exercise?.workout_id && (
-                    <label>
+                  <label>
+
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <label className="checkbox">
                     <div className="form-row">Add to existing workout?</div>
                     <input
                         type="checkbox"
                         checked={addToExistingWorkout}
                         onChange={handleCheckboxChange}
                     />
+                      </label>
+                    </div>
+
                     {addToExistingWorkout && (
                     <label>
                         <div className="form-row">Select Workout</div>
@@ -241,7 +260,7 @@ function UpdateExerciseForm() {
                         </select>
                     </label>
                     )}
-                    </label>
+                  </label>
                 )
             }
 

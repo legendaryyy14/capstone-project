@@ -1,11 +1,25 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
+    const history = useHistory();
+
+	const handleAllWorkoutsButton = () => {
+		history.push(`/workouts`);
+	}
+	const handleMyWorkoutsButton = () => {
+		history.push(`/my-workouts`);
+	}
+	const handleMyExercisesButton = () => {
+		history.push(`/my-exercises`);
+	}
+	const handleLikedWorkoutsButton = () => {
+		history.push(`/liked`);
+	}
 
 	return (
 		<div>
@@ -23,18 +37,26 @@ function Navigation({ isLoaded }){
 			)}
 		</div>
 		<div className='nav-menu'>
-			<NavLink to="/workouts">
-				All Workouts
-			</NavLink>
-			{/* <NavLink to="/workouts/liked">
-				Liked Workouts
-			</NavLink> */}
-			<NavLink to="/my-workouts">
-				My Workouts
-			</NavLink>
-			<NavLink to="/my-exercises">
-				My Exercises
-			</NavLink>
+		<button
+            onClick={() => handleAllWorkoutsButton()}
+          >
+            All Workouts
+          </button>
+		  <button
+            onClick={() => handleLikedWorkoutsButton()}
+          >
+            Liked Workouts
+          </button>
+		  <button
+            onClick={() => handleMyWorkoutsButton()}
+          >
+            My Workouts
+          </button>
+		  <button
+            onClick={() => handleMyExercisesButton()}
+          >
+            My Exercises
+          </button>
 		</div>
 
 		</div>

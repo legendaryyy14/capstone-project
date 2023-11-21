@@ -67,14 +67,14 @@
 /* Media query for smaller screens, two columns */
 @media (max-width: 768px) {
   .exercise-tile {
-    width: calc(50% - 20px);
+    width: 80%;
   }
 }
 
 /* Media query for even smaller screens, one column */
 @media (max-width: 576px) {
   .exercise-tile {
-    width: 100%;
+    width: 80%;
   }
 }
 

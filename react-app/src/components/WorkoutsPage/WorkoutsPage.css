@@ -35,7 +35,7 @@
 /* Media query for smaller screens, two columns */
 @media (max-width: 700px) {
   .workout {
-    width: calc(50% - 20px);
+    width: 100%
   }
 }
 

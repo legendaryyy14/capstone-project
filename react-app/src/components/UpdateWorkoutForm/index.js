@@ -22,7 +22,7 @@ function UpdateWorkoutForm() {
     const updateDescription = (e) => setDescription(e.target.value);
 
     useEffect(() => {
-      setImage(workout.image_url || "");
+      setImage(workout.image_url || "")
     }, [setImage, workout]);
 
     const handleSubmit = async (e) => {
@@ -39,14 +39,21 @@ function UpdateWorkoutForm() {
         formData.append("image_url", image);
 
         setImageLoading(true);
-        console.log("Form Data Content:", Array.from(formData.entries()));
+        // console.log("Form Data Content:", Array.from(formData.entries()));
 
 
 
         try {
           const response = await dispatch(editWorkout(formData));
           if (response && response?.errors) {
-              setErrors(response?.errors);
+            const parsedErrors = {};
+            response?.errors.forEach((error) => {
+              const [field, message] = error.split(' : ');
+              parsedErrors[field.trim()] = message.trim();
+            });
+
+            setErrors(parsedErrors);
+            // console.log("Setting Errors:", errors);
           } else {
               history.push(`/workouts/${workoutId}`);
           }
