@@ -23,9 +23,9 @@ function DeleteExerciseModal({ exerciseId }) {
 
   return (
     <div className='modal'>
-      <div>Confirm delete</div>
+      <h2>Confirm delete</h2>
       <div>Are you sure you want to remove this exercise?</div>
-      <button className='delete' onClick={handleDeleteClick} style={{ color: 'red' }}>Delete Exercise Permanently</button>
+      <button className='delete' onClick={handleDeleteClick} style={{ color: 'red' }}>Yes (Delete Exercise Permanently)</button>
       <button onClick={handleClick}>No (Keep Exercise)</button>
     </div>
   )

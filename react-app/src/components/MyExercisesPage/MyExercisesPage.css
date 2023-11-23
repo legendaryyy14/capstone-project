@@ -1,9 +1,85 @@
-.exercise-img {
-    width: 370px; /* Adjust the width to your desired size */
-    display:flex;
-    margin-left: 0px auto; /* Center the logo */
-  }
+/* MyExercisesPage.css */
 
-.workout-nav-link:hover {
-  color: gray;
+.exercise-page {
+  text-align: center;
+}
+
+.space-under-title {
+  margin-bottom: 5px;
+}
+.no-exercises {
+  text-align: center;
+  margin-top: 30px;
+}
+.exercise-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Create columns that adjust based on browser size */
+  gap: 10px; /* Adjust the gap between spots */
+  margin-top: 30px; /* Add margin to the top */
+  text-align: center;
+}
+
+.exercise-tile {
+  margin-top: 15px;
+  margin-right: 1px;
+  border: 2px solid #323131; /* Set your desired border style */
+  border-radius: 10px;
+  padding-right: 10px;
+}
+
+/* .exercise-img {
+  max-width: 100%;
+  height: auto;
+} */
+.exercise-img, .small-exercise-img {
+  max-width: 100%;
+  height: 200px;
+  width: 400px;
+  object-fit: cover;
+
+}
+
+.update-btn,
+.create-exercise-button,
+.delete-button {
+  margin-top: 10px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.update-btn {
+  background-color: #333;
+  color: white;
+}
+
+.create-exercise-button {
+  background-color: #333;
+  color: white;
+}
+
+.delete-button {
+  background-color: #ff3333;
+  color: white;
+}
+
+/* Media query for smaller screens, two columns */
+@media (max-width: 768px) {
+  .exercise-tile {
+    width: 80%;
+  }
+}
+
+/* Media query for even smaller screens, one column */
+@media (max-width: 576px) {
+  .exercise-tile {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .exercise-wrapper {
+    grid-template-columns: repeat(4, 1fr); /* Set a fixed number of columns for larger screens */
+  }
 }

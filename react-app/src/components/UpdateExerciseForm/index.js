@@ -21,27 +21,30 @@ function UpdateExerciseForm() {
     const [description, setDescription] = useState(exercise?.description);
     const [sets, setSets ] = useState(exercise?.sets);
     const [reps, setReps ] = useState(exercise?.reps);
-    const [imageUrl, setImageUrl] = useState(exercise?.image_url);
+    const [image, setImage] = useState(exercise?.image_url);
+    const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState({});
+    const [generalError, setGeneralError] = useState("");
 
     const updateTitle = (e) => setTitle(e.target.value);
     const updateDescription = (e) => setDescription(e.target.value);
     const updateSets = (e) => setSets(e.target.value)
     const updateReps = (e) => setReps(e.target.value)
-    const updateImageUrl = (e) => setImageUrl(e.target.value);
 
     useEffect(() => {
         dispatch(getWorkoutByIdThunk(exercise?.workout_id));
         dispatch(getExerciseByIdThunk(exerciseId));
         dispatch(getAllWorkoutsThunk())
     }, [dispatch, exerciseId, exercise?.workout_id]);
-
+    useEffect(() => {
+      setImage(exercise.image_url || "");
+    }, [setImage, exercise]);
 
     const handleCancelButton = () => {
         history.goBack();
       };
 
-    const getWorkoutTitle = (exerciseWorkoutId) => {
+    const getWorkoutTitle = () => {
 
         if (workout) {
           return (
@@ -64,26 +67,62 @@ function UpdateExerciseForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
+        setGeneralError("")
         const normalizedWorkoutId = selectedWorkoutId !== null ? selectedWorkoutId : "";
-        const payload = {
-            id: exercise?.id,
-            workout_id: normalizedWorkoutId,
-            user_id: userId,
-            title,
-            description,
-            sets,
-            reps,
-            image_url: imageUrl
-        };
-        const res = await dispatch(editExercise(payload));
+        const formData = new FormData();
+        formData.append("id", exerciseId);
+        formData.append("workout_id", normalizedWorkoutId);
+        formData.append("user_id", userId);
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("sets", sets);
+        formData.append("reps", reps);
+        formData.append("image_url", image);
+        setImageLoading(true);
+        // console.log("Form Data Content:", Array.from(formData.entries()));
 
-        if (res && res?.errors) {
-            setErrors(res?.errors);
-        } else if (res?.workout_id) {
-            history.push(`/workouts/${res?.workout_id}`);
-        } else {
-            history.push(`/my-exercises`);
+
+        try {
+          const response = await dispatch(editExercise(formData));
+          if (response && response?.errors) {
+            const parsedErrors = {};
+            response?.errors.forEach((error) => {
+              const [field, message] = error.split(' : ');
+              parsedErrors[field.trim()] = message.trim();
+            });
+
+            setErrors(parsedErrors);
+            // console.log("Setting Errors:", errors);
+
+          } else if (response?.workout_id) {
+                history.push(`/workouts/${response?.workout_id}`);
+            } else {
+                history.push(`/my-exercises`);
+            }
+        } catch (error) {
+            setGeneralError("An error occurred. Please try again later.");
+        } finally {
+            setImageLoading(false);
         }
+        // const payload = {
+        //     id: exercise?.id,
+        //     workout_id: normalizedWorkoutId,
+        //     user_id: userId,
+        //     title,
+        //     description,
+        //     sets,
+        //     reps,
+        //     image_url: imageUrl
+        // };
+        // const res = await dispatch(editExercise(payload));
+
+        // if (res && res?.errors) {
+        //     setErrors(res?.errors);
+        // } else if (res?.workout_id) {
+        //     history.push(`/workouts/${res?.workout_id}`);
+        // } else {
+        //     history.push(`/my-exercises`);
+        // }
 
     };
 
@@ -94,37 +133,53 @@ function UpdateExerciseForm() {
 
             {
                 exercise?.workout_id ? (
-                    <p>Included in: {getWorkoutTitle(exercise?.workout_id)}</p>
+                    <p>Included in: {getWorkoutTitle()}</p>
                 ) : (
                     <p>Included in: None</p>
                 )
             }
+
+            {generalError && (
+              <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                  {generalError}
+              </p>
+            )}
 
           <label>
             <div className="form-row">
               Title
             </div>
             <input
+              className="text-input"
               type="text"
               placeholder="Title"
               value={title}
               onChange={updateTitle}
             />
-              <p className="errors" style={{color:"red", fontSize:11}}>{errors.title}</p>
           </label>
+            {errors.title && (
+              <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                  {errors.title}
+              </p>
+            )}
 
           <label>
             <div className="form-row">
               Description
             </div>
-            <input
-              type="text"
+            <textarea
+              className="description-textarea"
               placeholder="Description"
               value={description}
               onChange={updateDescription}
+              rows={4} // Adjust the number of rows as needed
             />
-              <p className="errors" style={{color:"red", fontSize:11}}>{errors.description}</p>
           </label>
+            {errors.description && (
+              <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                  {errors.description}
+              </p>
+            )}
 
           <label>
             <div className="form-row">
@@ -137,8 +192,11 @@ function UpdateExerciseForm() {
               </option>
             ))}
           </select>
-            <p className="errors" style={{color:"red", fontSize:11}}>{errors.sets}</p>
-          </label>
+          {errors.sets && (
+                    <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                        {errors.sets}
+                    </p>
+                )}           </label>
 
           <label>
             <div className="form-row">
@@ -151,31 +209,44 @@ function UpdateExerciseForm() {
               </option>
             ))}
           </select>
-            <p className="errors" style={{color:"red", fontSize:11}}>{errors.reps}</p>
-          </label>
+          {errors.reps && (
+                    <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                        {errors.reps}
+                    </p>
+                )}
+
+                </label>
 
           <label>
-            <div className="form-row">
+
+          <div className="form-row" >
               Exercise Photo
             </div>
-            <input
-              type="text"
-              placeholder="Exercise Photo URL"
-              value={imageUrl}
-              onChange={updateImageUrl}
-            />
-              <p className="errors" style={{color:"red", fontSize:11}}>{errors.image_url}</p>
+            <div className="file-input-container">
+              <input
+                className="choose-file"
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </div>
           </label>
 
             {
                 !exercise?.workout_id && (
-                    <label>
+                  <label>
+
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <label className="checkbox">
                     <div className="form-row">Add to existing workout?</div>
                     <input
                         type="checkbox"
                         checked={addToExistingWorkout}
                         onChange={handleCheckboxChange}
                     />
+                      </label>
+                    </div>
+
                     {addToExistingWorkout && (
                     <label>
                         <div className="form-row">Select Workout</div>
@@ -189,17 +260,17 @@ function UpdateExerciseForm() {
                         </select>
                     </label>
                     )}
-                    </label>
+                  </label>
                 )
             }
 
 
           <button
             type="submit"
-            disabled={ !description || !imageUrl}
           >
             Update Exercise
           </button>
+          {(imageLoading)&& <p>Loading...</p>}
 
           <button
             onClick={() => handleCancelButton()}

@@ -8,43 +8,82 @@ function UpdateWorkoutForm() {
     const history = useHistory()
     const userId = useSelector((state) => state.session.user.id);
     const { workoutId } = useParams();
-    const workout = useSelector((state) => state.workouts[workoutId])
+    const workout = useSelector((state) => state?.workouts?.[workoutId])
 
-    const [title, setTitle] = useState(workout?.title);
-    const [description, setDescription] = useState(workout?.description);
-    const [isPublic, setIsPublic] = useState(workout?.public);
-    const [imageUrl, setImageUrl] = useState(workout?.image_url);
+    const [title, setTitle] = useState(workout?.title || "");
+    const [description, setDescription] = useState(workout?.description || "");
+    const [isPublic, setIsPublic] = useState(workout?.public || false);
+    const [image, setImage] = useState(workout?.image_url);
+    const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState({});
+    const [generalError, setGeneralError] = useState("");
 
     const updateTitle = (e) => setTitle(e.target.value);
     const updateDescription = (e) => setDescription(e.target.value);
-    const updateImageUrl = (e) => setImageUrl(e.target.value);
+
+    useEffect(() => {
+      setImage(workout.image_url || "")
+    }, [setImage, workout]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
-        const payload = {
-          id: workout?.id,
-          user_id: userId,
-          title,
-          description,
-          public: isPublic,
-          image_url: imageUrl
-        };
+        setGeneralError("");
 
-        const res = await dispatch(editWorkout(payload));
+        const formData = new FormData();
+        formData.append("id", workoutId);
+        formData.append("user_id", userId);
+        formData.append("title", title);
+        formData.append("public", isPublic);
+        formData.append("description", description);
+        formData.append("image_url", image);
 
-        if (res && res?.errors) {
-            setErrors(res?.errors);
+        setImageLoading(true);
+        // console.log("Form Data Content:", Array.from(formData.entries()));
+
+
+
+        try {
+          const response = await dispatch(editWorkout(formData));
+          if (response && response?.errors) {
+            const parsedErrors = {};
+            response?.errors.forEach((error) => {
+              const [field, message] = error.split(' : ');
+              parsedErrors[field.trim()] = message.trim();
+            });
+
+            setErrors(parsedErrors);
+            // console.log("Setting Errors:", errors);
           } else {
-            history.push(`/workouts/${workout?.id}`);
-          };
+              history.push(`/workouts/${workoutId}`);
+          }
+        } catch (error) {
+            setGeneralError("An error occurred. Please try again later.");
+        } finally {
+            setImageLoading(false);
+        }
+
+
+
+        // const payload = {
+        //   id: workout?.id,
+        //   user_id: userId,
+        //   title,
+        //   description,
+        //   public: isPublic,
+        //   image_url: imageUrl
+        // };
+
+        // const res = await dispatch(editWorkout(payload));
+
+        // if (res && res?.errors) {
+        //     setErrors(res?.errors);
+        //   } else {
+        //     history.push(`/workouts/${workout?.id}`);
+        //   };
 
     };
-    useEffect(() => {
-        console.log("Checkbox state changed:", isPublic);
-        // Perform actions that depend on the updated isPublic state here
-      }, [isPublic]);
+
 
     const handleCheckboxChange = () => {
     setIsPublic(!isPublic);
@@ -57,9 +96,14 @@ function UpdateWorkoutForm() {
 
 
     return (
-<div>
+      <div>
         <form className="form" onSubmit={handleSubmit}>
           <h1>Update {`${workout?.title}`}</h1>
+            {generalError && (
+              <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                  {generalError}
+              </p>
+            )}
 
           <label>
             <div className="form-row">
@@ -71,8 +115,12 @@ function UpdateWorkoutForm() {
               value={title}
               onChange={updateTitle}
             />
-              <p className="errors" style={{color:"red", fontSize:11}}>{errors.title}</p>
-          </label>
+              {errors.title && (
+                  <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                      {errors.title}
+                  </p>
+              )}
+              </label>
 
           <label>
             <div className="form-row">
@@ -84,20 +132,27 @@ function UpdateWorkoutForm() {
               value={description}
               onChange={updateDescription}
             />
-              <p className="errors" style={{color:"red", fontSize:11}}>{errors.description}</p>
-          </label>
+                {errors.description && (
+                    <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                        {errors.description}
+                    </p>
+                )}
+                </label>
 
           <label>
             <div className="form-row">
               Workout Photo
             </div>
             <input
-              type="text"
-              placeholder="Workout Photo URL"
-              value={imageUrl}
-              onChange={updateImageUrl}
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files?.[0])}
             />
-              <p className="errors" style={{color:"red", fontSize:11}}>{errors.image_url}</p>
+                  {/* {errors.image_url && (
+                      <p className="errors" style={{ color: "red", fontSize: 11 }}>
+                          {errors.image_url}
+                      </p>
+                  )} */}
           </label>
 
           <label>
@@ -114,10 +169,10 @@ function UpdateWorkoutForm() {
 
           <button
             type="submit"
-            disabled={ !description || !imageUrl}
           >
             Update Workout
           </button>
+          {(imageLoading)&& <p>Loading...</p>}
 
           <button
             onClick={() => handleCancelButton()}

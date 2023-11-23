@@ -18,6 +18,7 @@ function SignupFormModal() {
 		if (password === confirmPassword) {
 			const data = await dispatch(signUp(username, email, password));
 			if (data) {
+				console.log(data)
 				setErrors(data);
 			} else {
 				closeModal();
@@ -34,11 +35,10 @@ function SignupFormModal() {
 			<h1 style={{ textAlign: "center" }}>Sign Up</h1>
 			<form onSubmit={handleSubmit}
 				style={{
-          			display: "flex",
-          			flexDirection: "column",
-					justifyContent: "space-evenly"
-
-        			}}>
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+				}}>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
