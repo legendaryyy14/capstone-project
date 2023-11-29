@@ -72,6 +72,45 @@ def create_exercise():
         return exercise.to_dict()
     return {'errors': form.errors}, 400
 
+# CREATE EXERCISE FOR SPECIFIC WORKOUT
+@exercise_routes.route('/<int:workoutId>/add-exercise', methods=["POST"])
+@login_required
+def create_exercise_workout():
+    """
+    Create a new exercise and returns it
+    """
+    form = ExerciseForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+
+        # AWS Steps
+        image = form.data["image_url"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print(upload)
+
+        if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message (and we printed it above)
+            return {"errors": upload.errors}
+
+        url = upload["url"]
+
+        exercise = Exercise(
+            workout_id = form.data['workout_id'],
+            user_id = form.data['user_id'],
+            title = form.data['title'],
+            description = form.data['description'],
+            sets = form.data['sets'],
+            reps = form.data['reps'],
+            image_url = url
+        )
+        db.session.add(exercise)
+        db.session.commit()
+        return exercise.to_dict()
+    return {'errors': form.errors}, 400
+
 
 # UPDATE AN EXERCISE
 @exercise_routes.route('/<int:id>', methods=['PUT'])

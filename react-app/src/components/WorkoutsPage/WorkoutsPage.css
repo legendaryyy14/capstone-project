@@ -29,7 +29,7 @@
   max-width: 100%;
   height: 200px;
   width: 400px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* Media query for smaller screens, two columns */

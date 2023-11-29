@@ -22,7 +22,7 @@ function UpdateWorkoutForm() {
     const updateDescription = (e) => setDescription(e.target.value);
 
     useEffect(() => {
-      setImage(workout.image_url || "")
+      setImage(workout?.image_url || "")
     }, [setImage, workout]);
 
     const handleSubmit = async (e) => {
@@ -93,7 +93,6 @@ function UpdateWorkoutForm() {
     const handleCancelButton = () => {
       history.goBack();
     };
-
 
     return (
       <div>

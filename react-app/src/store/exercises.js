@@ -92,6 +92,24 @@ export const getAllExercisesThunk = () => async (dispatch) => {
 
   };
 
+  export const createExerciseForWorkout = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/exercises/${payload.get(`workoutId`)}/add-exercise`, {
+      method: "POST",
+      body: payload,
+    });
+
+    try {
+      const createdExercise = await response.json();
+      dispatch(addExercise(createdExercise));
+      return createdExercise
+    } catch(error) {
+      return error
+    }
+
+  };
+
+
+
   export const editExercise = (payload) => async (dispatch) => {
     const response = await fetch(`/api/exercises/${payload.get(`id`)}`, {
       method: "PUT",

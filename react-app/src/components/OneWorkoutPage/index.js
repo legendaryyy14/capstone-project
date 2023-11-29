@@ -27,8 +27,9 @@ function OneWorkoutPage() {
         dispatch(getUsersThunk())
     }, [dispatch, workoutId])
 
-    const handleCreateExerciseClick = () => {
-      history.push(`/exercises/create`);
+    const handleCreateExerciseClick = (workoutId) => {
+      console.log(workoutId)
+      history.push(`/exercises/${workoutId}/add-exercise`);
   };
     const handleWorkoutUpdateClick = (workoutId) => {
       history.push(`/workouts/${workoutId}/update`);
@@ -58,9 +59,9 @@ function OneWorkoutPage() {
               {exercises.length > 0 && (
                 <button
                   className="create-exercise-button"
-                  onClick={() => handleCreateExerciseClick()}
+                  onClick={() => handleCreateExerciseClick(workoutId)}
                 >
-                Create an exercise
+                Add an exercise
                 </button>
               )}
               </div>
@@ -76,7 +77,7 @@ function OneWorkoutPage() {
           <div className="one-workout-buttons">
             <button
             className="create-exercise-button"
-            onClick={() => handleCreateExerciseClick()}
+            onClick={() => handleCreateExerciseClick(workoutId)}
             >
                 Create an exercise
             </button>
@@ -106,11 +107,11 @@ function OneWorkoutPage() {
                         Update
                     </button>
 
-                    <OpenModalButton
+                    {/* <OpenModalButton
                         className="delete-button"
                         buttonText="Delete"
                         modalComponent={<DeleteExerciseModal exerciseId={exercise?.id}/>}
-                    />
+                    /> */}
               </div>
             )}
 

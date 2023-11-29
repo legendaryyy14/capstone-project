@@ -14,6 +14,7 @@ import CreateExerciseForm from "./components/CreateExerciseForm";
 import CreateWorkoutForm from "./components/CreateWorkoutForm";
 import UpdateExerciseForm from "./components/UpdateExerciseForm";
 import UpdateWorkoutForm from "./components/UpdateWorkoutForm";
+import CreateExerciseFormForWorkout from "./components/CreateExerciseForWorkoutForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +63,9 @@ function App() {
           </Route>
           <Route path="/exercises/create">
             <CreateExerciseForm />
+          </Route>
+          <Route path="/exercises/:workoutId/add-exercise">
+            <CreateExerciseFormForWorkout />
           </Route>
           <Route path="/exercises/:exerciseId">
             <UpdateExerciseForm />
