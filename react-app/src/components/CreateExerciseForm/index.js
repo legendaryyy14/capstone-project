@@ -34,6 +34,9 @@ function CreateExerciseForm() {
         dispatch(getAllWorkoutsThunk());
     }, [dispatch]);
 
+    const handleCancelButton = () => {
+      history.goBack();
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -224,6 +227,11 @@ function CreateExerciseForm() {
             Create Exercise
           </button>
           {(imageLoading)&& <p>Loading...</p>}
+          <button
+            onClick={() => handleCancelButton()}
+          >
+            Cancel
+          </button>
         </form>
       </div>
     )
