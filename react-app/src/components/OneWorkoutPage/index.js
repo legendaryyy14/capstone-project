@@ -61,7 +61,7 @@ function OneWorkoutPage() {
                   className="create-exercise-button"
                   onClick={() => handleCreateExerciseClick(workoutId)}
                 >
-                Create an exercise
+                Add an exercise
                 </button>
               )}
               </div>
@@ -107,11 +107,11 @@ function OneWorkoutPage() {
                         Update
                     </button>
 
-                    <OpenModalButton
+                    {/* <OpenModalButton
                         className="delete-button"
                         buttonText="Delete"
                         modalComponent={<DeleteExerciseModal exerciseId={exercise?.id}/>}
-                    />
+                    /> */}
               </div>
             )}
 

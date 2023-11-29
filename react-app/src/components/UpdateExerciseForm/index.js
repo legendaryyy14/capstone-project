@@ -37,7 +37,7 @@ function UpdateExerciseForm() {
         dispatch(getAllWorkoutsThunk())
     }, [dispatch, exerciseId, exercise?.workout_id]);
     useEffect(() => {
-      setImage(exercise.image_url || "");
+      setImage(exercise?.image_url || "");
     }, [setImage, exercise]);
 
     const handleCancelButton = () => {
@@ -62,6 +62,40 @@ function UpdateExerciseForm() {
 
     const handleDropdownChange = (e) => {
         setSelectedWorkoutId(parseInt(e.target.value));
+    };
+
+    const handleRemoveButton = async (e) => {
+      try {
+        const formData = new FormData();
+        formData.append("id", exerciseId);
+        formData.append("workout_id", "");
+        formData.append("user_id", userId);
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("sets", sets);
+        formData.append("reps", reps);
+        formData.append("image_url", image);
+
+        const response = await dispatch(editExercise(formData));
+
+        if (response && response?.errors) {
+          const parsedErrors = {};
+          response?.errors.forEach((error) => {
+            const [field, message] = error.split(' : ');
+            parsedErrors[field.trim()] = message.trim();
+          });
+
+          setErrors(parsedErrors);
+        } else if (response?.workout_id) {
+          history.push(`/workouts/${response?.workout_id}`);
+        } else {
+          history.push(`/my-exercises`);
+        }
+      } catch (error) {
+        setGeneralError("An error occurred. Please try again later.");
+      } finally {
+        setImageLoading(false);
+      }
     };
 
     const handleSubmit = async (e) => {
@@ -233,7 +267,7 @@ function UpdateExerciseForm() {
           </label>
 
             {
-                !exercise?.workout_id && (
+                !exercise?.workout_id ? (
                   <label>
 
                   <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -261,8 +295,39 @@ function UpdateExerciseForm() {
                     </label>
                     )}
                   </label>
+                ) : (
+                  <label>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <label className="checkbox">
+                      <div className="form-row">Move to different workout?</div>
+                      <input
+                        type="checkbox"
+                        checked={addToExistingWorkout}
+                        onChange={handleCheckboxChange}
+                      />
+                    </label>
+                  </div>
+
+                  {addToExistingWorkout && (
+                    <label>
+                      <div className="form-row">Select Workout</div>
+                      <select value={selectedWorkoutId} onChange={handleDropdownChange}>
+                        <option value={null}>Select a workout</option>
+                        {myWorkouts
+                          .filter((workout) => workout.id !== exercise?.workout_id)
+                          .map((workout) => (
+                            <option key={workout.id} value={workout.id}>
+                              {workout.title}
+                            </option>
+                          ))}
+                      </select>
+                    </label>
+                  )}
+                </label>
                 )
             }
+
+
 
 
           <button
@@ -277,6 +342,15 @@ function UpdateExerciseForm() {
           >
             Cancel
           </button>
+
+          {exercise?.workout_id && (
+          <button
+          onClick={() => handleRemoveButton()}
+          style={{ color: 'red' }}
+        >
+          Remove exercise from current workout
+        </button>
+                  )}
         </form>
       </div>
     )

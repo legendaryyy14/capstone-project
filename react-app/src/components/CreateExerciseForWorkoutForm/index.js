@@ -8,7 +8,6 @@ import { getAllWorkoutsThunk } from "../../store/workouts";
 function CreateExerciseFormForWorkout() {
     const dispatch = useDispatch();
     const { workoutId } = useParams();
-    console.log(useParams())
     const history = useHistory();
     const userId = useSelector((state) => state.session.user.id);
     const workout = useSelector((state) => state.workouts[workoutId]);
