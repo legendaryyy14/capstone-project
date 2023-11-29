@@ -35,6 +35,9 @@ function CreateExerciseFormForWorkout() {
         dispatch(getAllWorkoutsThunk());
     }, [dispatch]);
 
+    const handleCancelButton = () => {
+      history.push(`/workouts/${workoutId}`);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -54,8 +57,8 @@ function CreateExerciseFormForWorkout() {
         try {
           const response = await dispatch(createExerciseForWorkout(formData));
 
-          if (response && response.errors) {
-              setErrors(response.errors);
+          if (response && response?.errors) {
+              setErrors(response?.errors);
           } else if (response?.workout_id) {
               history.push(`/workouts/${response?.workout_id}`);
           } else {
@@ -225,6 +228,11 @@ function CreateExerciseFormForWorkout() {
             Create Exercise
           </button>
           {(imageLoading)&& <p>Loading...</p>}
+          <button
+            onClick={() => handleCancelButton()}
+          >
+            Cancel
+          </button>
         </form>
       </div>
     )
