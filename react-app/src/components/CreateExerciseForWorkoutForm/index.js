@@ -102,7 +102,7 @@ function CreateExerciseFormForWorkout() {
 
 
     return (
-        <div>
+        <div className="center-form">
         <form className="form" onSubmit={handleSubmit}>
           <h1>Create A New Exercise for {`${workout?.title}`}</h1>
 

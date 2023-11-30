@@ -81,7 +81,7 @@ function CreateWorkoutForm() {
     };
 
     return (
-        <div>
+        <div className="center-form">
         <form className="form" encType="multipart/form-data" onSubmit={handleSubmit}>
           <h1>Create A New Workout</h1>
 

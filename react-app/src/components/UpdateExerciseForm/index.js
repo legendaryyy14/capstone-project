@@ -161,7 +161,7 @@ function UpdateExerciseForm() {
     };
 
     return (
-        <div>
+        <div className="center-form">
         <form className="form" onSubmit={handleSubmit}>
           <h1>Update {`${exercise?.title}`} Exercise</h1>
 
