@@ -101,7 +101,7 @@ function CreateExerciseForm() {
 
 
     return (
-        <div>
+        <div className="center-form">
         <form className="form" onSubmit={handleSubmit}>
           <h1>Create A New Exercise</h1>
 
@@ -174,7 +174,6 @@ function CreateExerciseForm() {
           </select>
           </label>
 
-          <label className="file-input-label">
             <div className="form-row">
               Exercise Photo
             </div>
@@ -191,7 +190,6 @@ function CreateExerciseForm() {
                 {errors.image_url}
               </p>
             )}
-          </label>
 
           <div className='no-pad' style={{ display: 'flex', alignItems: 'center' }}>
           <label className="checkbox">

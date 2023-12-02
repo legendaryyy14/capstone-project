@@ -2,10 +2,29 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-left: 25%;
-    padding-right: 25%;
+    width: 500px;
+    /* margin-left: 25%; */
+    /* margin-right: 35%; */
 }
 
+.center-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; Optional: Set a specific height for centering vertically */
+}
+
+.choose-file {
+  cursor: pointer;
+}
+
+select {
+  cursor: pointer;
+}
+
+.checkbox input {
+  cursor: pointer;
+}
 .text-input {
     width: 210px;
     margin-top: 0px;

@@ -93,7 +93,8 @@ export const getAllExercisesThunk = () => async (dispatch) => {
   };
 
   export const createExerciseForWorkout = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/exercises/${payload.get(`workoutId`)}/add-exercise`, {
+    console.log(payload)
+    const response = await fetch(`/api/exercises/${payload.get(`workout_id`)}/add-exercise`, {
       method: "POST",
       body: payload,
     });

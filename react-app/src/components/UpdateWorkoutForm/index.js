@@ -95,7 +95,7 @@ function UpdateWorkoutForm() {
     };
 
     return (
-      <div>
+      <div className="center-form">
         <form className="form" onSubmit={handleSubmit}>
           <h1>Update {`${workout?.title}`}</h1>
             {generalError && (

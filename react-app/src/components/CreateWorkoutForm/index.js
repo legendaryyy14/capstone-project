@@ -81,7 +81,7 @@ function CreateWorkoutForm() {
     };
 
     return (
-        <div>
+        <div className="center-form">
         <form className="form" encType="multipart/form-data" onSubmit={handleSubmit}>
           <h1>Create A New Workout</h1>
 
@@ -128,7 +128,6 @@ function CreateWorkoutForm() {
           </label>
 
 
-          <label className="file-input-label">
             <div className="form-row">
               Workout Photo
             </div>
@@ -145,7 +144,6 @@ function CreateWorkoutForm() {
                 {errors.image_url}
               </p>
             )}
-          </label>
 
           <div style={{ display: 'flex', alignItems: 'center' }}>
           <label className="checkbox">
