@@ -43,7 +43,7 @@ function OneWorkoutPage() {
         <div>
             <div className="workouts-page">
             <h1>{`${workout?.title}`} by {`${owner?.username}`}</h1>
-            <p>{`${workout?.description}`}</p>
+            <p className="sets-reps">{`${workout?.description}`}</p>
             {workout?.user_id === userId && (
               <div className="one-workout-buttons">
               <button className="update-btn" onClick={() => handleWorkoutUpdateClick(workout.id)}>
@@ -96,8 +96,8 @@ function OneWorkoutPage() {
                 title={`${exercise?.title}`}
               />
               <div>
-                <p>{`${exercise?.sets}`} sets x {`${exercise?.reps}`} reps</p>
-                <p>{`${exercise?.description}`}</p>
+                <p className="sets-reps">{`${exercise?.sets}`} sets x {`${exercise?.reps}`} reps</p>
+                <p className="exercise-description">{`${exercise?.description}`}</p>
               </div>
 
               <div className="exercise-buttons">

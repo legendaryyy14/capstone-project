@@ -1,15 +1,16 @@
 /* TODO Add site wide styles */
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500&display=swap');
 
   button:not(.profile-btn) {
     background-color: black;
     border: 2px solid #323131;
     border-radius: 10px;
-    box-shadow: 2px 4px 4px rgba(148, 124, 15, 0.6);
+    box-shadow: 2px 4px 4px #C69C6D;
     cursor: pointer;
     color: white;
-    padding: 3px;
-    margin: 5px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 5px;
+    margin: 10px;
+    font-family: 'Roboto Condensed', sans-serif;
     font-size: large;
 
   }
@@ -19,7 +20,7 @@
   .profile-btn {
     background-color: black;
     border-radius: 100%;
-    box-shadow: 2px 4px 4px rgba(148, 124, 15, 0.6);
+    box-shadow: 2px 4px 4px #C69C6D;
     border: 1px solid #323131;
     cursor: pointer;
 
@@ -36,7 +37,7 @@
   }
 
   .workout-img:hover {
-    box-shadow: 2px 4px 4px rgba(148, 124, 15, 0.6);
+    box-shadow: 2px 4px 4px #C69C6D;
     transform: translateY(-5px);  }
 
   .exercise-img {
@@ -71,7 +72,7 @@
     background-color: black;
     border: 2px solid #323131; /* Set your desired border style */
     border-radius: 10px;
-    box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6);
+    box-shadow: 2px 4px 8px #C69C6D;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -84,11 +85,11 @@
     background: none;
     border: 1px solid rgb(44, 42, 42);
     border-radius: 10px;
-    box-shadow: 2px 4px 4px rgba(148, 124, 15, 0.6);
+    box-shadow: 2px 4px 4px #C69C6D;
     padding: 10px 10px;
     font-size: 14px;
     color: white; /* Set your desired color */
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     margin-bottom: 10px;
   }
 
@@ -105,7 +106,7 @@
     margin-top: 40px;
     padding-left: 20px;
     /* padding: 12px; */
-    box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6)
+    box-shadow: 2px 4px 8px #C69C6D
   }
 
 
@@ -145,7 +146,7 @@
 
   a, h1, h2, p, div {
     text-decoration: none;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     padding: 5px;
     margin: 2px;
   }
@@ -161,8 +162,8 @@
   a:hover {
     text-decoration: underline;
   }
-  p, a {
-    color: rgb(207, 204, 204);
+  a {
+    color: rgb(153, 150, 150);
   }
    h1 {
     color: white;
@@ -171,26 +172,21 @@
   h2 {
     color: white;
   }
+.exercise-description {
+  color: white;
+}
 
-  div {
-    color: rgb(196, 192, 192);
-  }
-
-
-
-
-  .note {
-    font-style: italic;
-    color: gray;
-    font-size: small;
-  }
+.note {
+  font-style: italic;
+  color: gray;
+  font-size: small;
+}
 
 
 
   html {
     background-color: black;
     padding: 8px;
-    /* color: white; */
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-
+    color: white;
+    font-family: 'Roboto Condensed', sans-serif;
   }

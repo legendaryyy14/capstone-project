@@ -348,7 +348,7 @@ function UpdateExerciseForm() {
           onClick={() => handleRemoveButton()}
           style={{ color: 'red' }}
         >
-          Remove exercise from current workout
+          Remove from Workout
         </button>
                   )}
         </form>

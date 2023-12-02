@@ -42,7 +42,7 @@ function MyWorkoutsPage() {
           {myWorkouts.map((workout) => (
             <div className="workout">
               <h2>{`${workout?.title}`}</h2>
-              <p>{`by ${user?.username}`}</p>
+              <p className="by">{`by ${user?.username}`}</p>
               <p>Public: {workout?.public ? (<span>yes</span>) : (<span>no</span>)}</p>
               <NavLink
               key={workout.id}
