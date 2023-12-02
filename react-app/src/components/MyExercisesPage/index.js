@@ -76,13 +76,13 @@ function MyExercisesPage() {
                      />
 
                      <div>
-                     <p>{`${exercise?.sets}`} sets x {`${exercise?.reps}`} reps</p>
-                     <p>{`${exercise?.description}`}</p>
+                     <p className="sets-reps">{`${exercise?.sets}`} sets x {`${exercise?.reps}`} reps</p>
+                     <p className="exercise-description">{`${exercise?.description}`}</p>
                      {
                         exercise.workout_id ? (
-                            <p>Included in: {getWorkoutTitle(exercise?.workout_id)}</p>
+                            <p className="exercise-description">Included in: {getWorkoutTitle(exercise?.workout_id)}</p>
                         ) : (
-                            <p>Included in: None</p>
+                            <p className="exercise-description">Included in: None</p>
                         )
                     }
 

@@ -14,7 +14,7 @@
   margin-right: 28px;
   padding-left: 20px;
   /* padding: 12px; */
-  box-shadow: 2px 4px 8px rgba(148, 124, 15, 0.6); /* Set your desired box-shadow */
+  box-shadow: 2px 4px 8px #C69C6D; /* Set your desired box-shadow */
   /* color: white; */
   font-size: 14px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -24,7 +24,7 @@
   background: none;
   border: 1px solid rgb(44, 42, 42);
   border-radius: 10px;
-  box-shadow: 2px 4px 4px rgba(148, 124, 15, 0.6);
+  box-shadow: 2px 4px 4px #C69C6D;
   padding: 10px 10px 10px;
   font-size: 14px;
   color: white; /* Set your desired color */
@@ -68,7 +68,6 @@ li {
   align-items:flex-start;
   padding: 40px 20px 40px 10px; /* Adjust padding as needed */
   border-bottom: 1px solid rgba(147, 145, 138, 0.6);
-  position: sticky;
 }
 
 .nav-menu a {
@@ -77,7 +76,7 @@ li {
   border: 2px solid #323131; /* Set your desired border style */
   border-radius: 10px;
   padding: 8px;
-  box-shadow: 2px 4px 4px rgba(148, 124, 15, 0.6); /* Set your desired box-shadow */
+  box-shadow: 2px 4px 4px #C69C6D; /* Set your desired box-shadow */
   color: white;
   font-size: large;
   font-family: Verdana, Geneva, Tahoma, sans-serif;

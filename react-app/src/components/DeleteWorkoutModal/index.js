@@ -22,7 +22,7 @@ function DeleteWorkoutModal({ workoutId }) {
     <div className='modal'>
       <h2>Confirm delete</h2>
       <div>Are you sure you want to remove this workout?</div>
-      <p className='note'>Exercises will still remain in 'My Exercises'.</p>
+      <p className='note'>* Exercises will still remain in 'My Exercises'.</p>
       <button style={{ color: 'red' }} onClick={handleDeleteClick}>Yes (Delete Workout)</button>
       <button onClick={handleClick}>No (Keep Workout)</button>
     </div>
