@@ -73,9 +73,9 @@ def create_exercise():
     return {'errors': form.errors}, 400
 
 # CREATE EXERCISE FOR SPECIFIC WORKOUT
-@exercise_routes.route('/<int:workoutId>/add-exercise', methods=["POST"])
+@exercise_routes.route('/<int:id>/add-exercise', methods=["POST"])
 @login_required
-def create_exercise_workout():
+def create_exercise_workout(id):
     """
     Create a new exercise and returns it
     """
@@ -98,7 +98,7 @@ def create_exercise_workout():
         url = upload["url"]
 
         exercise = Exercise(
-            workout_id = form.data['workout_id'],
+            workout_id = id,
             user_id = form.data['user_id'],
             title = form.data['title'],
             description = form.data['description'],

@@ -14,7 +14,17 @@
   /* height: 100vh; Optional: Set a specific height for centering vertically */
 }
 
+.choose-file {
+  cursor: pointer;
+}
 
+select {
+  cursor: pointer;
+}
+
+.checkbox input {
+  cursor: pointer;
+}
 .text-input {
     width: 210px;
     margin-top: 0px;

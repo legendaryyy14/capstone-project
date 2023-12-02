@@ -53,16 +53,13 @@ function CreateExerciseFormForWorkout() {
         formData.append("sets", sets);
         formData.append("reps", reps);
         setImageLoading(true);
-
         try {
           const response = await dispatch(createExerciseForWorkout(formData));
 
           if (response && response?.errors) {
               setErrors(response?.errors);
-          } else if (response?.workout_id) {
-              history.push(`/workouts/${response?.workout_id}`);
-          } else {
-            history.push(`/my-exercises`)
+          } else if (workoutId) {
+              history.push(`/workouts/${workoutId}`);
           }
         } catch (error) {
             setGeneralError("An error occurred. Please try again later.");
@@ -175,7 +172,25 @@ function CreateExerciseFormForWorkout() {
           </select>
           </label>
 
-          <label className="file-input-label">
+          <div className="form-row">
+            Exercise Photo
+          </div>
+          <div className="file-input-container">
+            <input
+              id="fileInput"
+              className="choose-file"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+          </div>
+          {errors.image_url && (
+            <p className="errors" style={{ color: "red", fontSize: 11 }}>
+              {errors.image_url}
+            </p>
+          )}
+
+          {/* <label className="file-input-label">
             <div className="form-row">
               Exercise Photo
             </div>
@@ -192,7 +207,7 @@ function CreateExerciseFormForWorkout() {
                 {errors.image_url}
               </p>
             )}
-          </label>
+          </label> */}
 
           {/* <div className='no-pad' style={{ display: 'flex', alignItems: 'center' }}>
           <label className="checkbox">
