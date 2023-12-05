@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { editWorkout } from "../../store/workouts";
+import { getWorkoutByIdThunk, editWorkout } from "../../store/workouts";
 
 function UpdateWorkoutForm() {
     const dispatch = useDispatch();
@@ -17,13 +17,23 @@ function UpdateWorkoutForm() {
     const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState({});
     const [generalError, setGeneralError] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
 
     const updateTitle = (e) => setTitle(e.target.value);
     const updateDescription = (e) => setDescription(e.target.value);
 
     useEffect(() => {
       setImage(workout?.image_url || "")
-    }, [setImage, workout]);
+      setIsLoading(true);
+      const fetchWorkout = async () => {
+        dispatch(getWorkoutByIdThunk(workoutId));
+
+        // Set loading to false when data is fetched
+        setIsLoading(false);
+      }
+      fetchWorkout()
+
+    }, [setImage, workoutId]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -156,7 +166,7 @@ function UpdateWorkoutForm() {
 
           <label>
             <div className="form-row">
-              Public?
+            Public: Do you want this workout to be seen by all users?
             </div>
             <input
               type="checkbox"
