@@ -24,17 +24,31 @@ function Navigation({ isLoaded }){
 	return (
 		<div>
 		<div className='navigation-container'>
-			<div className='space-filler'></div>
+			{/* <div className='space-filler'></div> */}
 
-          <NavLink to="/">
-            <img src="/FLEXY.png" alt="Home" className="home-logo" />
-          </NavLink>
 
 			{isLoaded && (
 				<div>
 					<ProfileButton user={sessionUser} />
 				</div>
 			)}
+
+			<NavLink to="/">
+				<img src="/FLEXY.png" alt="Home" className="home-logo" />
+			</NavLink>
+
+			<div className="search">
+				<form action="#">
+				<input type="text"
+				placeholder=" Search Workouts"
+				name="search"/>
+				<button>
+				<i className="fa fa-search">
+				</i>
+				</button>
+				</form>
+			</div>
+
 		</div>
 		<div className='nav-menu'>
 		<button
