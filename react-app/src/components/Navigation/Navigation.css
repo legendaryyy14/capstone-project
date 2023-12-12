@@ -1,12 +1,25 @@
 /* Navigation.css */
 /* Styles for the dropdown menu container */
   /* styling search bar */
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500&display=swap');
+
   .search input[type=text]{
     width:200px;
     height:25px;
-    border-radius:25px;
+    border-radius:100px;
     border: none;
 }
+input[type="text" i] {
+  writing-mode: horizontal-tb !important;
+  text-align: center;
+  line-height: 4; /* Adjust the value to center vertically */
+  padding-block: 1px;
+  padding-inline: 2px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+
 
 .search{
     float:center;
@@ -30,7 +43,7 @@
   box-shadow: 2px 4px 8px #C69C6D; /* Set your desired box-shadow */
   /* color: white; */
   font-size: 14px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .profile-dropdown button {
@@ -41,7 +54,7 @@
   padding: 10px 10px 10px;
   font-size: 14px;
   color: white; /* Set your desired color */
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   margin-bottom: 10px;
 
 }
@@ -95,7 +108,7 @@ li {
   box-shadow: 2px 4px 4px #C69C6D; /* Set your desired box-shadow */
   color: white;
   font-size: large;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   text-decoration: none
 
 }

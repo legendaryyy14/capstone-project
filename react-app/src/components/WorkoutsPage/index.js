@@ -46,7 +46,7 @@ function WorkoutsPage() {
           />
         </form>
         </div>
-
+        {filteredWorkouts.length === 0 && <p>No Results</p>}
         <div className="workout-wrapper">
           {filteredWorkouts?.map((workout) => (
             <div className="workout" key={workout?.id}>
