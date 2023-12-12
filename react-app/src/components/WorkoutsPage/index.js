@@ -19,6 +19,11 @@ function WorkoutsPage() {
     const faves = useSelector((state) => state.workouts.faves)
     const workoutObj = useSelector((state) => state.workouts);
     const workouts = Object.values(workoutObj).filter(workout => workout.public === true)
+    const [searchQuery, setSearchQuery] = useState("");
+    const filteredWorkouts = workouts.filter((workout) =>
+      workout.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     const users = useSelector((state) => state?.users?.users)
 
     // const handleWorkoutFaved = () => {
@@ -28,8 +33,22 @@ function WorkoutsPage() {
     return (
         <div className="workouts-page">
         <h1>All Workouts</h1>
+
+        <div className="search">
+        <form id="workoutSearchForm" onSubmit={(e) => e.preventDefault()}>
+          {/* <i className="fa fa-search"></i> */}
+          <input
+            type="text"
+            placeholder="Search Workouts"
+            name="search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </form>
+        </div>
+
         <div className="workout-wrapper">
-          {workouts?.map((workout) => (
+          {filteredWorkouts?.map((workout) => (
             <div className="workout" key={workout?.id}>
               <h2>{`${workout?.title}`}</h2>
               <p className='by'> {`by ${users?.filter(user => user?.id === workout?.user_id)[0].username}`}</p>

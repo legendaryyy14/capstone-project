@@ -17,7 +17,15 @@ def get_workouts():
     """
     Query for all workouts and returns them in a list of workout dictionaries
     """
-    workouts = Workout.query.all()
+    search_query = request.args.get('search', default='', type=str)
+
+    if search_query:
+        # If a search query is provided, filter workouts by title
+        workouts = Workout.query.filter(Workout.title.ilike(f"%{search_query}%")).all()
+    else:
+        # If no search query, get all workouts
+        workouts = Workout.query.all()
+
     return jsonify([workout.to_dict() for workout in workouts])
 
 # GET WORKOUT BY ID

@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
     const history = useHistory();
+	const dispatch = useDispatch();
 
 	const handleAllWorkoutsButton = () => {
 		history.push(`/workouts`);
@@ -20,6 +21,11 @@ function Navigation({ isLoaded }){
 	// const handleLikedWorkoutsButton = () => {
 	// 	history.push(`/liked`);
 	// }
+
+	// const handleSearchChange = (e) => {
+	// 	dispatch(setSearchQueryThunk(e.target.value));
+	// 	// ... any additional logic you need
+	//   };
 
 	return (
 		<div>
@@ -37,19 +43,21 @@ function Navigation({ isLoaded }){
 				<img src="/FLEXY.png" alt="Home" className="home-logo" />
 			</NavLink>
 
-			<div className="search">
+			{/* <div className="search">
 				<form id="workoutSearchForm">
-				<input type="text"
-				placeholder=" Search Workouts"
+				<input
+				type="text"
+				placeholder="Search Workouts"
 				name="search"
 				id="searchInput"
+				onChange={handleSearchChange}
 				/>
-				<button onClick={() => handleSearch()}>
+				<button>
 				<i className="fa fa-search">
 				</i>
 				</button>
 				</form>
-			</div>
+			</div> */}
 
 		</div>
 		<div className='nav-menu'>
