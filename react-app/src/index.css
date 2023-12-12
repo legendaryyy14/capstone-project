@@ -125,9 +125,9 @@
 
 
 
-  .root {
+  /* .root {
     align-items: center;
-  }
+  } */
 
   button .delete:hover {
     color: rgb(37, 5, 5);

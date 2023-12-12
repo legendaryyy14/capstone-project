@@ -1,81 +1,87 @@
 /* Navigation.css */
 /* Styles for the dropdown menu container */
-  /* styling search bar */
+/* styling search bar */
 
-  @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500&display=swap');
 
   .search input[type=text]{
     width:200px;
     height:25px;
     border-radius:100px;
     border: none;
-}
-input[type="text" i] {
-  writing-mode: horizontal-tb !important;
-  text-align: center;
-  line-height: 4; /* Adjust the value to center vertically */
-  padding-block: 1px;
-  padding-inline: 2px;
-  font-family: 'Roboto Condensed', sans-serif;
-}
+  }
+  input[type="text" i] {
+    writing-mode: horizontal-tb !important;
+    text-align: center;
+    line-height: 4; /* Adjust the value to center vertically */
+    padding-block: 1px;
+    padding-inline: 2px;
+    font-family: 'Roboto Condensed', sans-serif;
+  }
 
 
 
-.search{
-    float:center;
-    margin-top: 10px;
-}
+  /* Styling the dropdown menu container */
+  .profile-dropdown {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    background-color: black;
+    border: 2px solid #323131;
+    border-radius: 10px;
+    padding: 5px 15px;
+    margin-top: 60px;
+    margin-left: 28px;
+    box-shadow: 2px 4px 8px #C69C6D;
+    font-size: 14px;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: white;
+  }
 
+  .profile-dropdown button {
+    background: none;
+    border: 1px solid rgb(44, 42, 42);
+    border-radius: 10px;
+    box-shadow: 2px 4px 4px #C69C6D;
+    padding: 10px;
+    font-size: 14px;
+    color: white;
+    font-family: 'Roboto Condensed', sans-serif;
+    margin-bottom: 11px;
+  }
 
-.profile-dropdown {
-  position: absolute;
-  top: 40px; /* Adjust the distance from the button */
-  left: 20px; /* Change right to left */
-  /* background-color: black; Set your desired background color */
-  border: 2px solid #323131; /* Set your desired border style */
-  border-radius: 10px;
-  padding-top: 5px;
-  padding-right: 15px;
-  margin-top: 60px;
-  margin-left: 28px; /* Change margin-right to margin-left */
-  padding-left: 20px;
-  /* padding: 12px; */
-  box-shadow: 2px 4px 8px #C69C6D; /* Set your desired box-shadow */
-  /* color: white; */
-  font-size: 14px;
-  font-family: 'Roboto Condensed', sans-serif;
-}
-
-.profile-dropdown button {
-  background: none;
-  border: 1px solid rgb(44, 42, 42);
-  border-radius: 10px;
-  box-shadow: 2px 4px 4px #C69C6D;
-  padding: 10px 10px 10px;
-  font-size: 14px;
-  color: white; /* Set your desired color */
-  font-family: 'Roboto Condensed', sans-serif;
-  margin-bottom: 10px;
-
-}
-
-li {
-  list-style: none;
+  li {
+    list-style: none;
   color: white;
   padding: 5px;
 }
+.navigation-container div {
+  justify-content:flex-start;
+}
+.navigation-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Center items vertically */
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: black;
+  position: relative; /* Ensure relative positioning for absolute child elements */
+}
 
 .home-logo {
-  position: absolute;
-  width: 300px;
-  top: 13%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 350px;
+  margin-left: 45px;
+  /* position: absolute; */
+
+  /* transform: translate(-50%, -50%); */
+  /* Add additional styling properties as needed */
 }
 
-.navigation-container .space-filler {
-  margin-left: 30px;
+.navigation-container a {
+  position: relative;
+  justify-content: center;
+  height: max-content;
 }
+
 
 .user-logo {
   width: 20px; /* Adjust the width to your desired size */
@@ -83,13 +89,6 @@ li {
   margin-left: 0px auto; /* Center the logo */
 }
 
-.navigation-container {
-  display: flex;
-  justify-content: space-between;
-  align-items:flex-start;
-  padding: 10px 20px; /* Adjust padding as needed */
-  background-color: black;
-}
 
 .nav-menu {
   display: flex;
@@ -119,5 +118,5 @@ li {
 
 
 .profile-button {
-  margin-left: auto; /* Push the profile button to the right */
+  margin-right: auto; /* Push the profile button to the right */
 }

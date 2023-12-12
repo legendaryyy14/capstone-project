@@ -30,7 +30,10 @@ function Navigation({ isLoaded }){
 	return (
 		<div>
 		<div className='navigation-container'>
-			{/* <div className='space-filler'></div> */}
+		<div></div>
+			<NavLink to="/">
+				<img src="/FLEXY.png" alt="Home" className="home-logo" />
+			</NavLink>
 
 
 			{isLoaded && (
@@ -38,10 +41,6 @@ function Navigation({ isLoaded }){
 					<ProfileButton user={sessionUser} />
 				</div>
 			)}
-
-			<NavLink to="/">
-				<img src="/FLEXY.png" alt="Home" className="home-logo" />
-			</NavLink>
 
 			{/* <div className="search">
 				<form id="workoutSearchForm">
@@ -60,6 +59,7 @@ function Navigation({ isLoaded }){
 			</div> */}
 
 		</div>
+
 		<div className='nav-menu'>
 		<button
             onClick={() => handleAllWorkoutsButton()}
