@@ -1,6 +1,28 @@
 /* Navigation.css */
 /* Styles for the dropdown menu container */
+  /* styling search bar */
+  .search input[type=text]{
+    width:200px;
+    height:25px;
+    border-radius:25px;
+    border: none;
+}
 
+.search{
+    float:right;
+    margin:7px;
+}
+
+.search button{
+    background-color: #0074D9;
+    color: #f2f2f2;
+    float: right;
+    padding: 5px 10px;
+    margin-right: 16px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+}
 .profile-dropdown {
   position: absolute;
   top: 40px; /* Adjust the distance from the button */

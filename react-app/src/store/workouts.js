@@ -234,12 +234,16 @@ export default function reducer(state = initialState, action) {
       newState = { ...state };
       delete newState[action.payload];
       return newState;
+
     case GET_FAVES:
       return { ...state, faves: action.payload };
+
     case GET_WORKOUT_FAVES:
       return { ...state, workoutFaves: action.payload };
+
     case FAVE_WORKOUT:
       return { ...state, faves: action.payload };
+
     case UNFAVE_WORKOUT:
       return { ...state, faves: action.payload };
 

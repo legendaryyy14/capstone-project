@@ -38,11 +38,13 @@ function Navigation({ isLoaded }){
 			</NavLink>
 
 			<div className="search">
-				<form action="#">
+				<form id="workoutSearchForm">
 				<input type="text"
 				placeholder=" Search Workouts"
-				name="search"/>
-				<button>
+				name="search"
+				id="searchInput"
+				/>
+				<button onClick={() => handleSearch()}>
 				<i className="fa fa-search">
 				</i>
 				</button>
