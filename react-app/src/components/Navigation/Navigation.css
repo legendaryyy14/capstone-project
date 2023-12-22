@@ -10,7 +10,7 @@
     border-radius:100px;
     border: none;
   }
-  input[type="text" i] {
+  .search input[type="text" i] {
     writing-mode: horizontal-tb !important;
     text-align: center;
     line-height: 4; /* Adjust the value to center vertically */

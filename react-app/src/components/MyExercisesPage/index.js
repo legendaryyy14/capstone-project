@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getAllExercisesThunk } from "../../store/exercises";
@@ -15,6 +15,11 @@ function MyExercisesPage() {
     const userId = useSelector((state) => state.session.user.id);
     const myWorkouts = useSelector((state) => Object.values(state.workouts).filter(workout => workout?.user_id === userId));
     const myExercises = useSelector((state) => Object.values(state.exercises).filter(exercise => exercise?.user_id === userId))
+    const [searchQuery, setSearchQuery] = useState("");
+    const filteredExercises = myExercises.filter((exercise) =>
+      exercise.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
 
     useEffect(() => {
         dispatch(getAllExercisesThunk());
@@ -51,6 +56,20 @@ function MyExercisesPage() {
             <div className="space-under-title">
             <h1>My Exercises</h1>
 
+            <div className="search">
+                <form id="workoutSearchForm" onSubmit={(e) => e.preventDefault()}>
+                {/* <i className="fa fa-search"></i> */}
+                <input
+                    type="text"
+                    placeholder="Search My Exercises"
+                    name="search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                </form>
+            </div>
+            {filteredExercises.length === 0 && <p>No Results</p>}
+
             <button
             className="create-exercise-button"
             onClick={() => handleCreateClick()}
@@ -61,7 +80,7 @@ function MyExercisesPage() {
             </div>
 
             <div className="exercise-wrapper">
-            {myExercises.map((exercise) => (
+            {filteredExercises.map((exercise) => (
                 <div
                     key={exercise.id}
                     className="exercise-tile"

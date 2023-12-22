@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getAllWorkoutsThunk } from "../../store/workouts";
@@ -17,6 +17,10 @@ function MyWorkoutsPage() {
     const user = useSelector((state) => state.session.user);
     const workoutObj = useSelector((state) => state.workouts);
     const myWorkouts = Object.values(workoutObj).filter(workout => workout?.user_id === user.id)
+    const [searchQuery, setSearchQuery] = useState("");
+    const filteredWorkouts = myWorkouts.filter((workout) =>
+      workout.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     const handleCreateClick = () => {
       history.push(`/workouts/create`);
@@ -30,6 +34,20 @@ function MyWorkoutsPage() {
         <div className="my-workouts-page">
         <div className="space-under-title">
         <h1>My Workouts</h1>
+
+        <div className="search">
+        <form id="workoutSearchForm" onSubmit={(e) => e.preventDefault()}>
+          {/* <i className="fa fa-search"></i> */}
+          <input
+            type="text"
+            placeholder="Search My Workouts"
+            name="search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </form>
+        </div>
+        {filteredWorkouts.length === 0 && <p>No Results</p>}
         <button
             className="create-workout-button"
             onClick={() => handleCreateClick()}
@@ -39,7 +57,7 @@ function MyWorkoutsPage() {
 
         </div>
         <div className="workout-wrapper">
-          {myWorkouts.map((workout) => (
+          {filteredWorkouts.map((workout) => (
             <div className="workout">
               <h2>{`${workout?.title}`}</h2>
               <p className="by">{`by ${user?.username}`}</p>
