@@ -18,9 +18,9 @@ function Navigation({ isLoaded }){
 	const handleMyExercisesButton = () => {
 		history.push(`/my-exercises`);
 	}
-	// const handleLikedWorkoutsButton = () => {
-	// 	history.push(`/liked`);
-	// }
+	const handleLikedWorkoutsButton = () => {
+		history.push(`/workouts/favorites/${sessionUser.id}`);
+	}
 
 	// const handleSearchChange = (e) => {
 	// 	dispatch(setSearchQueryThunk(e.target.value));
@@ -66,11 +66,11 @@ function Navigation({ isLoaded }){
           >
             All Workouts
           </button>
-		  {/* <button
+		  <button
             onClick={() => handleLikedWorkoutsButton()}
           >
             Liked Workouts
-          </button> */}
+          </button>
 		  <button
             onClick={() => handleMyWorkoutsButton()}
           >
