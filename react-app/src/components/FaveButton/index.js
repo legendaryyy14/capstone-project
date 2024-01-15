@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFavesThunk, faveWorkoutThunk, unfaveWorkoutThunk } from "../../store/workouts";
+import { getFavesThunk, faveWorkoutThunk, unfaveWorkoutThunk } from "../../store/faves";
 
 function FaveButton ({workoutId, onFave}) {
     const dispatch = useDispatch();
@@ -10,7 +10,7 @@ function FaveButton ({workoutId, onFave}) {
     console.log(faves)
 
     useEffect(() => {
-        dispatch(getFavesThunk());
+        dispatch(getFavesThunk(userId));
     }, [dispatch]);
 
     useEffect(() => {

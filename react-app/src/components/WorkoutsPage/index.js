@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getAllWorkoutsThunk, getFavesThunk, faveWorkoutThunk, unfaveWorkoutThunk } from "../../store/workouts";
+import { getAllFavesThunk, faveWorkoutThunk, unfaveWorkoutThunk } from "../../store/faves";
+import { getAllWorkoutsThunk } from "../../store/workouts";
 import { getUsersThunk } from "../../store/users";
 import FaveButton from "../FaveButton";
 import "./WorkoutsPage.css"
@@ -9,26 +10,25 @@ import "./WorkoutsPage.css"
 function WorkoutsPage() {
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getAllWorkoutsThunk());
-        dispatch(getUsersThunk());
-        // dispatch(getFavesThunk())
-    }, [dispatch]);
 
     const userId = useSelector((state) => state.session.user.id);
-    const faves = useSelector((state) => state.workouts.faves)
+    const faves = useSelector((state) => state.faves)
     const workoutObj = useSelector((state) => state.workouts);
     const workouts = Object.values(workoutObj).filter(workout => workout.public === true)
+    const users = useSelector((state) => state?.users?.users)
     const [searchQuery, setSearchQuery] = useState("");
     const filteredWorkouts = workouts.filter((workout) =>
-      workout.title.toLowerCase().includes(searchQuery.toLowerCase())
+    workout.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
+    useEffect(() => {
+      dispatch(getAllWorkoutsThunk());
+      dispatch(getUsersThunk());
+      dispatch(getAllFavesThunk())
+    }, [dispatch]);
 
-    const users = useSelector((state) => state?.users?.users)
-
-    // const handleWorkoutFaved = () => {
-    //   dispatch(getFavesThunk());
-    // };
+    const handleWorkoutFaved = () => {
+      dispatch(faveWorkoutThunk());
+    };
 
     return (
         <div className="workouts-page">
@@ -66,13 +66,17 @@ function WorkoutsPage() {
             </NavLink>
               <p>{`${workout?.description}`}</p>
 
-            {/* <p className="faves">
+<div className="row">
               <FaveButton
                   workoutId={workout.id}
                   className="fave-button"
                   onFave={handleWorkoutFaved}
               />
-            </p> */}
+
+<p>{`${Object.values(faves).filter(fave => workout?.id === fave?.workout_id).length}`}</p>
+
+</div>
+
 
             </div>
           ))}

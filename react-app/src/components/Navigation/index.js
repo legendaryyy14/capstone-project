@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
 		history.push(`/my-exercises`);
 	}
 	const handleLikedWorkoutsButton = () => {
-		history.push(`/workouts/favorites/${sessionUser.id}`);
+		history.push(`/faves/${sessionUser.id}`);
 	}
 
 	// const handleSearchChange = (e) => {
