@@ -15,7 +15,7 @@
 
 ## Link to Live Site
 
-[Cool Music Player Live Site](https://capstone-project-ren5.onrender.com)
+[FLEXY](https://capstone-project-ren5.onrender.com)
 
 <br>
 
