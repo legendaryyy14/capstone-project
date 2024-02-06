@@ -1,9 +1,37 @@
-# Flask React Project
+#  <img src="./react-app/public/favicon.ico" style="width:40px;" />   &nbsp; Flexy
 
-This is the starter for the Flask React project.
+<br>
 
-## Getting started
-1. Clone this repository (only this branch)
+## Flexy: Table of Contents
+
+-   [Link to Live Site](https://github.com/legendaryyy14/capstone-project#link-to-live-site)
+-   [Description](https://github.com/legendaryyy14/capstone-project#description)
+-   [Getting Started](https://github.com/legendaryyy14/capstone-project#getting-started)
+-   [Technologies](https://github.com/legendaryyy14/capstone-project#technologies)
+-   [Features](https://github.com/legendaryyy14/capstone-project#features)
+-   [Screenshots](https://github.com/legendaryyy14/capstone-project#screenshots)
+
+<br>
+
+## Link to Live Site
+
+[Cool Music Player Live Site](https://capstone-project-ren5.onrender.com)
+
+<br>
+
+## Description
+
+Flexy is a fullstack CRUD app implemented with a PFRN stack. This app allows a user to look up a workout plan that includes exercises or simply create their own.
+
+<br>
+
+## Getting Started
+
+1. Clone this repository
+
+   ```bash
+   git clone https://github.com/legendaryyy14/capstone-project.git
+   ```
 
 2. Install dependencies
 
@@ -11,17 +39,11 @@ This is the starter for the Flask React project.
       pipenv install -r requirements.txt
       ```
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
+3. Create a **.env** file based on the .env.example file with credentials of your choice.
 
-4. Make sure the SQLite3 database connection URL is in the **.env** file
+4. Setup your PostgreSQL user, password and database to match your chosen credentials in the .env file.
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention**.
-
-6. Get into your pipenv, migrate your database, seed your database, and run your Flask app
+5. Enter your shell environment, upgrade and seed your database, and run your flask app
 
    ```bash
    pipenv shell
@@ -39,110 +61,76 @@ This is the starter for the Flask React project.
    flask run
    ```
 
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+6. To run the React App, go inside the `react-app` directory, `npm install` and `npm start`. This should open your browser automatically but if not, you may navigate to `localhost:5000` to access the application.
+
+<br>
+<br>
+
+## Technologies
 
 
-## Deployment through Render.com
+<br>
+<p float="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original-wordmark.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_477db83f729d63210139ec7cd29c1351/render-render.png" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlalchemy/sqlalchemy-original-wordmark.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original-wordmark.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original-wordmark.svg" style="width:75px;" />
+  &nbsp;
+</p>
 
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
+<br>
 
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
+## Features
 
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
+Users
+- Users can sign up, log in, and log out.
+- Users can use a demo log in to try the site.
+- Users can't use certain features without logging in.
 
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
+Workouts
+- Users should be able to view all public workouts.
+- Users should be able to create workouts.
+- Users should be able to update their created workouts.
+- Users should be able to delete their created workouts.
 
-### Part A: Configure the Start and Build Commands
+Exercises
+- Users should be able to view all exercises that belong to a public workout.
+- Users should be able to add exercises to a workout they created.
+- Users should be able to remove exercises from their created workouts.
+- Users should be able to delete their exercises.
 
-Start by giving your application a name.
+Favorites
+- Users should be able to view the favorites on a workout.
+- Users should be able to favorite a workout.
+- Users should be able to unfavorite a workout.
 
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
+Search
+- Users should be able to search all public workouts and all of their created workouts.
+- Users should be able to search all their own created exercises.
 
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
+<br>
 
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
+<!-- ## Screenshots -->
 
-For your Flask project, enter the following command into the Build field, all in
-one line:
-
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
-
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
-
-Now, add your start command in the Start field:
-
-```shell
-# start script
-gunicorn app:app
-```
-
-_If you are using websockets, use the following start command instead for increased performance:_
-
-`gunicorn --worker-class eventlet -w 1 app:app`
-
-### Part B: Add the Environment Variables
-
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
-
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from Internal Database URL field)
-
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
-
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
-
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
-
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+<!-- <img src="./react-app/public/images/<image_name_here>" style="width:600px;" /> -->
