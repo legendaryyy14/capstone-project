@@ -9,7 +9,7 @@
 -   [Getting Started](https://github.com/legendaryyy14/capstone-project#getting-started)
 -   [Technologies](https://github.com/legendaryyy14/capstone-project#technologies)
 -   [Features](https://github.com/legendaryyy14/capstone-project#features)
--   [Screenshots](https://github.com/legendaryyy14/capstone-project#screenshots)
+<!-- -   [Screenshots](https://github.com/legendaryyy14/capstone-project#screenshots) -->
 
 <br>
 

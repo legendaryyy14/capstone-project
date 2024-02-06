@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
 		history.push(`/my-exercises`);
 	}
 	const handleLikedWorkoutsButton = () => {
-		history.push(`/faves/${sessionUser.id}`);
+		history.push(`/faves`);
 	}
 
 	// const handleSearchChange = (e) => {
@@ -69,7 +69,7 @@ function Navigation({ isLoaded }){
 		  <button
             onClick={() => handleLikedWorkoutsButton()}
           >
-            Liked Workouts
+            Fave Workouts
           </button>
 		  <button
             onClick={() => handleMyWorkoutsButton()}
