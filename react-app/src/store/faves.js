@@ -46,7 +46,7 @@ const getFaves = (faves) => ({
     }
   };
 
-
+//need to work on home page updating likes.
   export const faveWorkoutThunk = (payload) => async (dispatch) => {
     const response = await fetch(`/api/faves/${payload.workoutId}/${payload.userId}`, {
       method: "POST",

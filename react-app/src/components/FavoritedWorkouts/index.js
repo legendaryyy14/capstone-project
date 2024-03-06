@@ -19,7 +19,7 @@ function FaveWorkoutsPage() {
         dispatch(faveWorkoutThunk());
       };
 
-console.log(faves)
+// console.log(faves)
     useEffect(() => {
         dispatch(getAllWorkoutsThunk());
         dispatch(getUsersThunk());

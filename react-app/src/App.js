@@ -50,7 +50,7 @@ function App() {
           <Route path="/workouts/create">
             <CreateWorkoutForm />
           </Route>
-          <Route path="/faves">
+          <Route path="/faves/">
             <FaveWorkoutsPage />
           </Route>
           <Route path="/workouts/:workoutId/update">
