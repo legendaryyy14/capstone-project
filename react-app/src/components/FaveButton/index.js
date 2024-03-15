@@ -55,7 +55,7 @@ function FaveButton ({workoutId, onFave}) {
           className="fave-button"
           onClick={setFaveButtonState}
           style={{
-            color: isFaved ? "gold" : "white",
+            color: isFaved ? "red" : "white",
           }}
         >
          <i class="fas fa-heart"></i>
