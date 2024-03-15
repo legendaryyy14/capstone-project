@@ -5,7 +5,7 @@
   justify-content: space-evenly;
 }
 
-  button:not(.profile-btn) {
+  button:not(.profile-btn, .fave-button) {
     background-color: black;
     border: 2px solid #323131;
     border-radius: 10px;
@@ -19,6 +19,18 @@
 
   }
 
+  .fave-button {
+    background-color: black;
+    border: none;
+    /* border-radius: 10px; */
+    /* box-shadow: 2px 4px 4px #C69C6D; */
+    cursor: pointer;
+    /* color: white; */
+    /* padding: 5px; */
+    /* margin: 10px; */
+    /* font-family: 'Roboto Condensed', sans-serif; */
+    font-size: large;
+  }
 
 
   .profile-btn {
@@ -54,7 +66,7 @@
     border: 2px solid #323131;
   }
 
-  button:hover {
+  button:hover:not(.fave-button) {
     color: gray;
     border: 1px solid #323131
   }
@@ -186,7 +198,12 @@
   font-size: small;
 }
 
-
+.fave-row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content:center;
+}
 
   html {
     background-color: black;

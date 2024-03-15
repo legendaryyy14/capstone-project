@@ -1,23 +1,83 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getAllWorkoutsThunk, getFavesThunk, faveWorkoutThunk, unfaveWorkoutThunk } from "../../store/workouts";
+import { getFavesThunk, getAllFavesThunk, faveWorkoutThunk, unfaveWorkoutThunk } from "../../store/faves";
+import { getAllWorkoutsThunk } from "../../store/workouts";
 import { getUsersThunk } from "../../store/users";
-// import FaveButton from "../FaveButton";
+import FaveButton from "../FaveButton";
 
 function FaveWorkoutsPage() {
     const dispatch = useDispatch();
     const userId = useSelector((state) => state.session.user.id);
-    const faves = useSelector((state) => state)
-console.log(userId)
+    const faves = Object.values(useSelector((state) => state.faves))
+    const [searchQuery, setSearchQuery] = useState("");
+    const filteredWorkouts = faves.filter((workout) =>
+    workout.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const handleWorkoutFaved = () => {
+        dispatch(faveWorkoutThunk());
+      };
+
+// console.log(faves)
     useEffect(() => {
         dispatch(getAllWorkoutsThunk());
         dispatch(getUsersThunk());
-        dispatch(getFavesThunk())
-    }, [dispatch]);
+        dispatch(getFavesThunk(userId));
+
+    }, [dispatch, userId]);
 
     return(
-        <h1>hi</h1>
+        <div className="workouts-page">
+            <h1>Favorite Workouts</h1>
+            {faves.length === 0 && <p>No Favorites... yet :)</p>}
+
+            <div className="search">
+                <form id="workoutSearchForm" onSubmit={(e) => e.preventDefault()}>
+                {/* <i className="fa fa-search"></i> */}
+                <input
+                    type="text"
+                    placeholder="Search Favorited Workouts"
+                    name="search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                </form>
+            </div>
+            <div className="workout-wrapper">
+                {filteredWorkouts?.map((workout) => (
+                    <div className="workout" key={workout?.id}>
+                        <h2>{`${workout?.title}`}</h2>
+                        <NavLink
+                            key={workout?.id}
+                            className="workout-tile"
+                            to={`/workouts/${workout?.id}`}
+                            >
+                            <img
+                                className="workout-img"
+                                src={`${workout?.image_url}`}
+                                alt="workout-cover"
+                                title={`${workout?.title}`}
+                            />
+                        </NavLink>
+                        <p>{`${workout?.description}`}</p>
+
+                        <div className="row">
+                        <FaveButton
+                        workoutId={workout.id}
+                        className="fave-button"
+                        onFave={handleWorkoutFaved}
+                        />
+
+                         <p>{`${Object.values(faves).filter(fave => workout?.id === fave?.workout_id).length}`}</p>
+
+                        </div>
+
+                    </div>
+                ))}
+            </div>
+        </div>
+
     )
 }
 

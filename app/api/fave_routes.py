@@ -10,7 +10,7 @@ fave_routes = Blueprint('faves', __name__)
 #GET ALL FAVORITES
 @fave_routes.route('/')
 @login_required
-def get_likes_count():
+def get_all_faves():
     """
     Query for all entries in Favorites table that has equals passed in workout_id
     """
@@ -23,7 +23,7 @@ def get_likes_count():
 #GET ALL OF LOGGED IN USER'S FAVORITED WORKOUTS
 @fave_routes.route('/<int:user_id>')
 @login_required
-def get_favorites(user_id):
+def get_user_favorites(user_id):
     """
     Query for all logged in user's favorited workouts and returns them in a list
     """
@@ -48,7 +48,7 @@ def add_like(workout_id, user_id):
         return fave.to_dict()
 
 #UNFAVORITE A WORKOUT
-@fave_routes.route('/<int:workout_id>/favorite/<int:user_id>', methods=['DELETE'])
+@fave_routes.route('/<int:workout_id>/<int:user_id>', methods=['DELETE'])
 @login_required
 def remove_fave(workout_id, user_id):
     fave_workout = Favorite.query.filter_by(workout_id=workout_id, user_id=user_id).first()
