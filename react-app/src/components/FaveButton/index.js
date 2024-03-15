@@ -24,8 +24,8 @@ function FaveButton ({workoutId, onFave}) {
           console.error("Invalid userId or workoutId");
           return;
         }
-
-        if (isFaved) {
+        {console.log('workoutIdxxxx:', typeOf(workoutId))}
+        if (isFaved && workoutId) {
           await dispatch(unfaveWorkoutThunk(workoutId, userId));
           setIsFaved(false);
         } else {
@@ -62,7 +62,7 @@ function FaveButton ({workoutId, onFave}) {
       <>
         {console.log('faves:', faves)}
         {console.log('workoutId:', workoutId)}
-        {faves.filter((fave) => fave.workout_id === workoutId).length}
+        {faves?.filter((fave) => fave.workout_id === workoutId).length}
       </>
     ) : null
   }
