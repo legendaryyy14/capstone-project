@@ -20,16 +20,21 @@ function FaveButton ({workoutId, onFave}) {
     const setFaveButtonState = async () => {
       try {
         // Check for valid userId and workoutId
+        const payload = {
+          workoutId: workoutId, // Replace with the correct workoutId
+          userId: userId,    // Replace with the correct userId
+        };
         if (!userId || !workoutId) {
           console.error("Invalid userId or workoutId");
           return;
         }
         if (isFaved && workoutId) {
-          await dispatch(unfaveWorkoutThunk(workoutId, userId));
+          {console.log('faving:', typeof(workoutId))}
+          await dispatch(unfaveWorkoutThunk(payload));
           setIsFaved(false);
         } else {
-          {console.log('workoutIdxxxx:', typeof(workoutId))}
-          await dispatch(faveWorkoutThunk(workoutId, userId));
+          {console.log('faving:', workoutId, userId)}
+          await dispatch(faveWorkoutThunk(payload));
           setIsFaved(true);
         }
 
