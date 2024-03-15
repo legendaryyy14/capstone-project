@@ -24,11 +24,11 @@ function FaveButton ({workoutId, onFave}) {
           console.error("Invalid userId or workoutId");
           return;
         }
-        {console.log('workoutIdxxxx:', typeOf(workoutId))}
         if (isFaved && workoutId) {
           await dispatch(unfaveWorkoutThunk(workoutId, userId));
           setIsFaved(false);
         } else {
+          {console.log('workoutIdxxxx:', typeof(workoutId))}
           await dispatch(faveWorkoutThunk(workoutId, userId));
           setIsFaved(true);
         }

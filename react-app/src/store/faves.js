@@ -47,21 +47,26 @@ const getFaves = (faves) => ({
   };
 
 //need to work on home page updating likes.
-  export const faveWorkoutThunk = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/faves/${payload.workoutId}/${payload.userId}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+export const faveWorkoutThunk = (payload) => async (dispatch) => {
+  if (!payload || !payload.workoutId || !payload.userId) {
+    // Check if payload or required properties are missing
+    return; // Exit the function if any required property is missing
+  }
 
-    if (response.ok) {
-      const faves = await response.json();
-      if (faves.errors) {
-        return faves.errors;
-      }
-      dispatch(faveWorkout(faves)); // Pass faves.data or the relevant data as the payload
+  const response = await fetch(`/api/faves/${payload.workoutId}/${payload.userId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (response.ok) {
+    const faves = await response.json();
+    if (faves.errors) {
+      return faves.errors;
     }
-  };
+    dispatch(faveWorkout(faves)); // Pass faves.data or the relevant data as the payload
+  }
+};
 
   export const unfaveWorkoutThunk = (workoutId, userId) => async (dispatch) => {
     const response = await fetch(`/api/faves/${workoutId}/${userId}`, {
