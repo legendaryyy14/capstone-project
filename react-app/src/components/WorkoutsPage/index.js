@@ -32,7 +32,7 @@ function WorkoutsPage() {
   }, [dispatch]);
 
   const handleWorkoutFaved = () => {
-    dispatch(faveWorkoutThunk());
+    dispatch(getAllFavesThunk());
   };
 
   return (

@@ -17,7 +17,7 @@ function FaveButton ({workoutId, onFave}) {
         setIsFaved(faves?.some((fave) => fave.workout_id === workoutId && fave.user_id === userId))
     }, [faves, workoutId, userId]);
 
-    const setFaveButtonState = () => {
+    const setFaveButtonState = async () => {
       try {
         // Check for valid userId and workoutId
         if (!userId || !workoutId) {
@@ -25,17 +25,17 @@ function FaveButton ({workoutId, onFave}) {
           return;
         }
         if (isFaved && workoutId) {
-           dispatch(unfaveWorkoutThunk(workoutId, userId));
+          await dispatch(unfaveWorkoutThunk(workoutId, userId));
           setIsFaved(false);
         } else {
           {console.log('workoutIdxxxx:', typeof(workoutId))}
-           dispatch(faveWorkoutThunk(workoutId, userId));
+          await dispatch(faveWorkoutThunk(workoutId, userId));
           setIsFaved(true);
         }
 
         // Callback after favoriting/unfavoriting is completed
         if (onFave) {
-           onFave();
+          await onFave();
         }
       } catch (error) {
         console.error("Error favoriting/unfavoriting workout:", error);
