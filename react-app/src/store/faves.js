@@ -50,6 +50,7 @@ const getFaves = (faves) => ({
 export const faveWorkoutThunk = (payload) => async (dispatch) => {
   if (!payload || !payload.workoutId || !payload.userId) {
     // Check if payload or required properties are missing
+    console.log(payload)
     return; // Exit the function if any required property is missing
   }
 
