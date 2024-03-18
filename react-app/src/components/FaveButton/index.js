@@ -7,7 +7,6 @@ function FaveButton ({workoutId, onFave}) {
     const userId = useSelector((state) => state.session.user.id);
     const faves = Object.values(useSelector((state) => state.faves))
     const [isFaved, setIsFaved] = useState(false);
-    console.log(faves)
 
     useEffect(() => {
         dispatch(getAllFavesThunk());
@@ -58,15 +57,13 @@ function FaveButton ({workoutId, onFave}) {
             color: isFaved ? "red" : "white",
           }}
         >
-         <i class="fas fa-heart"></i>
+         <i className="fas fa-heart"></i>
         </button>
 
         <p className="faves-count">
   {
     faves ? (
       <>
-        {console.log('faves:', faves)}
-        {console.log('workoutId:', workoutId)}
         {faves?.filter((fave) => fave.workout_id === workoutId).length}
       </>
     ) : null

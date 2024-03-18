@@ -80,7 +80,7 @@ function WorkoutsPage() {
             <div className="fave-row">
 
               <FaveButton
-                workoutId={workout.id}
+                workoutId={workout?.id}
                 className="fave-button"
                 onFave={handleWorkoutFaved}
 

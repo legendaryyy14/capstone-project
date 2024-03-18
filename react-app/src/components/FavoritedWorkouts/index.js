@@ -11,11 +11,18 @@ function FaveWorkoutsPage() {
     const userId = useSelector((state) => state.session.user.id);
     const faves = Object.values(useSelector((state) => state.faves))
     const [searchQuery, setSearchQuery] = useState("");
-    const filteredWorkouts = faves.filter((workout) => workout?.title?.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredWorkouts = faves?.filter((workout) => workout?.title?.toLowerCase().includes(searchQuery.toLowerCase()));
 
-    const handleWorkoutFaved = () => {
-        dispatch(faveWorkoutThunk());
-      };
+    const handleWorkoutFaved = async () => {
+        try {
+            // Refresh the list of faves after favoriting/unfavoriting a workout
+            await dispatch(getAllFavesThunk());
+        } catch (error) {
+            console.error("Error updating faves:", error);
+            // Handle the error, e.g., show a notification to the user
+        }
+    };
+
 
 // console.log(faves)
     useEffect(() => {
@@ -62,7 +69,7 @@ function FaveWorkoutsPage() {
 
                         <div className="row">
                         <FaveButton
-                        workoutId={workout.id}
+                        workoutId={workout?.id}
                         className="fave-button"
                         onFave={handleWorkoutFaved}
                         />
