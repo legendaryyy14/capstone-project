@@ -68,8 +68,8 @@ export const faveWorkoutThunk = (payload) => async (dispatch) => {
   }
 };
 
-  export const unfaveWorkoutThunk = (workoutId, userId) => async (dispatch) => {
-    const response = await fetch(`/api/faves/${workoutId}/${userId}`, {
+  export const unfaveWorkoutThunk = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/faves/${payload.workoutId}/${payload.userId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       // body: JSON.stringify(payload),

@@ -11,9 +11,7 @@ function FaveWorkoutsPage() {
     const userId = useSelector((state) => state.session.user.id);
     const faves = Object.values(useSelector((state) => state.faves))
     const [searchQuery, setSearchQuery] = useState("");
-    const filteredWorkouts = faves.filter((workout) =>
-    workout.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const filteredWorkouts = faves.filter((workout) => workout?.title?.toLowerCase().includes(searchQuery.toLowerCase()));
 
     const handleWorkoutFaved = () => {
         dispatch(faveWorkoutThunk());
