@@ -46,7 +46,6 @@ const getFaves = (faves) => ({
     }
   };
 
-//need to work on home page updating likes.
 export const faveWorkoutThunk = (payload) => async (dispatch) => {
   if (!payload || !payload.workoutId || !payload.userId) {
     // Check if payload or required properties are missing

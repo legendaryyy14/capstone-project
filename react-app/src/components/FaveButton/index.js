@@ -29,7 +29,7 @@ function FaveButton ({workoutId, onFave}) {
           return;
         }
         if (isFaved && workoutId) {
-          {console.log('faving:', typeof(workoutId))}
+          {console.log('unfaving:', payload)}
           await dispatch(unfaveWorkoutThunk(payload));
           setIsFaved(false);
         } else {
