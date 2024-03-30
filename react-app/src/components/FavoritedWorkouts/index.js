@@ -9,6 +9,7 @@ import FaveButton from "../FaveButton";
 function FaveWorkoutsPage() {
     const dispatch = useDispatch();
     const userId = useSelector((state) => state.session.user.id);
+    const workoutObj = useSelector((state) => state.workouts);
     const faves = Object.values(useSelector((state) => state.faves))
     const [searchQuery, setSearchQuery] = useState("");
     const filteredWorkouts = faves?.filter((workout) => workout?.title?.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -22,6 +23,7 @@ function FaveWorkoutsPage() {
             // Handle the error, e.g., show a notification to the user
         }
     };
+    {console.log(workoutObj)}
 
     {console.log(filteredWorkouts)}
 
