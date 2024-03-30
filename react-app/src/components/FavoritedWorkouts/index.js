@@ -11,8 +11,9 @@ function FaveWorkoutsPage() {
     const userId = useSelector((state) => state.session.user.id);
     const workoutObj = useSelector((state) => state.workouts);
     const faves = Object.values(useSelector((state) => state.faves))
+    const myFaves = faves.filter((fave) => fave?.user_id === userId)
     const [searchQuery, setSearchQuery] = useState("");
-    const filteredWorkouts = faves?.filter((workout) => workout?.title?.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredWorkouts = myFaves?.filter((workout) => workout?.title?.toLowerCase().includes(searchQuery.toLowerCase()));
 
     const handleWorkoutFaved = async () => {
         try {
@@ -25,9 +26,9 @@ function FaveWorkoutsPage() {
     };
     {console.log(workoutObj)}
 
-    {console.log(filteredWorkouts)}
+    {console.log(myFaves)}
 
-console.log(faves)
+console.log("faves:", faves)
     useEffect(() => {
         dispatch(getAllWorkoutsThunk());
         dispatch(getUsersThunk());
@@ -53,7 +54,7 @@ console.log(faves)
                 </form>
             </div>
             <div className="workout-wrapper">
-                {filteredWorkouts?.map((workout) => (
+                {faves?.map((workout) => (
                     <div className="workout" key={workout?.id}>
                         <h2>{`${workout?.title}`}</h2>
                         <NavLink
