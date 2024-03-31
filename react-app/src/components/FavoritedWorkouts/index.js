@@ -12,12 +12,15 @@ function FaveWorkoutsPage() {
     const workoutObj = useSelector((state) => state.workouts);
     const faves = Object.values(useSelector((state) => state.faves))
     const myFaves = faves?.filter((fave) => fave?.user_id === userId)
-    const myFaveWorkoutIds = faves?.map(fave => fave.workout_id);
-    const filteredWorkouts = Object.values(workoutObj).filter(workout => myFaveWorkoutIds.includes(workout.id));
+    const myFaveWorkoutIds = faves?.map(fave => fave?.workout_id);
+    const workouts = Object.values(workoutObj)
+    const myWorkouts = workouts?.filter(workout => myFaveWorkoutIds.includes(workout.id));
+
 
     const [searchQuery, setSearchQuery] = useState("");
-    // const searchedWorkouts = faves?.filter((workout) => workout?.includes(searchQuery.toLowerCase()));
-
+    const filteredWorkouts = myWorkouts.filter((workout) =>
+    workout.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
     const handleWorkoutFaved = async () => {
         try {
             // Refresh the list of faves after favoriting/unfavoriting a workout
@@ -28,9 +31,10 @@ function FaveWorkoutsPage() {
         }
     };
 
-    {console.log("allWorkouts:",workoutObj)}
+    {console.log("allWorkouts:",workouts)}
     {console.log("faves:", faves)}
     {console.log("myFaves:", myFaves)}
+    {console.log("myWorkouts", myFaveWorkoutIds)}
 
     useEffect(() => {
         dispatch(getAllWorkoutsThunk());
@@ -57,7 +61,7 @@ function FaveWorkoutsPage() {
                 </form>
             </div>
             <div className="workout-wrapper">
-                {filteredWorkouts?.map((workout) => (
+                {faves?.map((workout) => (
                     <div className="workout" key={workout?.id}>
                         <h2>{`${workout?.title}`}</h2>
                         <NavLink
