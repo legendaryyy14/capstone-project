@@ -61,7 +61,7 @@ function FaveWorkoutsPage() {
                 </form>
             </div>
             <div className="workout-wrapper">
-                {faves?.map((workout) => (
+                {filteredWorkouts?.map((workout) => (
                     <div className="workout" key={workout?.id}>
                         <h2>{`${workout?.title}`}</h2>
                         <NavLink
