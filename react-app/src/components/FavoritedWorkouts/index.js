@@ -9,19 +9,22 @@ import FaveButton from "../FaveButton";
 function FaveWorkoutsPage() {
 
 
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.session.user.id);
-  const faves = useSelector((state) => state.faves);
+  const favesObj = useSelector((state) => state.faves);
+  const faves = Object.values(favesObj).filter((fave) => fave?.user_id === userId )
   const workoutObj = useSelector((state) => state.workouts);
   const workouts = Object.values(workoutObj).filter(
     (workout) => workout.public === true
   );
+  console.log(faves)
   const users = useSelector((state) => state?.users?.users);
   const [searchQuery, setSearchQuery] = useState("");
   const filteredWorkouts = workouts.filter((workout) =>
     workout.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
   useEffect(() => {
     dispatch(getAllWorkoutsThunk());
     dispatch(getUsersThunk());
