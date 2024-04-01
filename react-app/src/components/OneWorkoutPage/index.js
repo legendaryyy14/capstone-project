@@ -28,7 +28,6 @@ function OneWorkoutPage() {
     }, [dispatch, workoutId])
 
     const handleCreateExerciseClick = (workoutId) => {
-      console.log(workoutId)
       history.push(`/exercises/${workoutId}/add-exercise`);
   };
     const handleWorkoutUpdateClick = (workoutId) => {

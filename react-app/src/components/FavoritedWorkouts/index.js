@@ -18,7 +18,6 @@ function FaveWorkoutsPage() {
   const workouts = Object.values(workoutObj).filter(workout =>
   workout.public === true && faves.some(fave => fave?.workout_id === workout.id)
 );
-  console.log(faves)
   const users = useSelector((state) => state?.users?.users);
   const [searchQuery, setSearchQuery] = useState("");
   const filteredWorkouts = workouts.filter((workout) =>
